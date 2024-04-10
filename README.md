@@ -1,0 +1,2 @@
+# theme
+Angular starter theme
