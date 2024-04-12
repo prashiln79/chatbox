@@ -2,8 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, E
 import { animate, AnimationBuilder, AnimationPlayer, style } from '@angular/animations';
 import { NavigationEnd, Router } from '@angular/router';
 import { ScrollStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
-import { merge, ReplaySubject, Subject, Subscription } from 'rxjs';
-import { delay, filter, takeUntil } from 'rxjs/operators';
+import { delay, filter, merge, ReplaySubject, Subject, Subscription, takeUntil } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseNavigationItem, FuseVerticalNavigationAppearance, FuseVerticalNavigationMode, FuseVerticalNavigationPosition } from '@fuse/components/navigation/navigation.types';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
@@ -90,6 +89,7 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
      */
     @HostBinding('class') get classList(): any
     {
+        /* eslint-disable @typescript-eslint/naming-convention */
         return {
             'fuse-vertical-navigation-animations-enabled'             : this._animationsEnabled,
             [`fuse-vertical-navigation-appearance-${this.appearance}`]: true,
@@ -101,6 +101,7 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
             'fuse-vertical-navigation-position-left'                  : this.position === 'left',
             'fuse-vertical-navigation-position-right'                 : this.position === 'right'
         };
+        /* eslint-enable @typescript-eslint/naming-convention */
     }
 
     /**

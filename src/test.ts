@@ -6,20 +6,19 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 
 declare const require: {
     context(path: string, deep?: boolean, filter?: RegExp): {
-        keys(): string[];
         <T>(id: string): T;
+        keys(): string[];
     };
 };
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
     BrowserDynamicTestingModule,
-    platformBrowserDynamicTesting(),
-    {teardown: {destroyAfterEach: true}}
+    platformBrowserDynamicTesting()
 );
 
 // Then we find all the tests.
 const context = require.context('./', true, /\.spec\.ts$/);
 
 // And load the modules.
-context.keys().map(context);
+context.keys().forEach(context);

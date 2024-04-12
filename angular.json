@@ -1,9 +1,15 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
+    "cli": {
+        "schematicCollections": [
+            "@angular-eslint/schematics"
+        ],
+        "analytics": "820f777b-3e23-4347-82d5-4c0aadcd5eeb"
+    },
     "newProjectRoot": "projects",
     "projects": {
-        "fuse": {
+        "riskanalysis": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -17,7 +23,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/fuse",
+                        "outputPath": "dist/riskanalysis",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -51,17 +57,36 @@
                             "src/styles/vendors.scss",
                             "src/@fuse/styles/main.scss",
                             "src/styles/styles.scss",
-                            "src/styles/tailwind.scss"
+                            "src/styles/tailwind.scss",
+                            {
+                                "input": "src/styles/theme-md-light-lara.scss",
+                                "bundleName": "md-light-lara",
+                                "inject": false
+                            },
+                            {
+                                "input": "src/styles/theme-md-dark-lara.scss",
+                                "bundleName": "md-dark-lara",
+                                "inject": false
+                            },
+                            "node_modules/primeicons/primeicons.css",
+                            "node_modules/pivottable/dist/pivot.min.css",
+                            "src/assets/lib/css/nrecopivottableext.css",
+                            "src/assets/lib/css/pivot.css"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/jquery-ui-dist/jquery-ui.min.js",
+                            "node_modules/pivottable/dist/pivot.min.js",
+                            "src/assets/lib/js/nrecopivottableext.js"
+                        ]
                     },
                     "configurations": {
                         "production": {
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "3mb",
-                                    "maximumError": "5mb"
+                                    "maximumWarning": "8mb",
+                                    "maximumError": "10mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
@@ -92,10 +117,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "fuse:build:production"
+                            "browserTarget": "riskanalysis:build:production"
                         },
                         "development": {
-                            "browserTarget": "fuse:build:development"
+                            "browserTarget": "riskanalysis:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -103,7 +128,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "fuse:build"
+                        "browserTarget": "riskanalysis:build"
                     }
                 },
                 "test": {
@@ -136,10 +161,5 @@
                 }
             }
         }
-    },
-    "defaultProject": "fuse",
-    "cli": {
-        "defaultCollection": "@angular-eslint/schematics",
-        "analytics": false
     }
 }

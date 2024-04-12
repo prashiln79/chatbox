@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BooleanInput } from '@angular/cdk/coercion';
 import { MatMenu } from '@angular/material/menu';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, takeUntil } from 'rxjs';
 import { FuseHorizontalNavigationComponent } from '@fuse/components/navigation/horizontal/horizontal.component';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { FuseNavigationItem } from '@fuse/components/navigation/navigation.types';

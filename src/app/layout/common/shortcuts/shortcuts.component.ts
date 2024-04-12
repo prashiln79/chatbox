@@ -1,259 +1,280 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { MatButton } from '@angular/material/button';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { Shortcut } from 'app/layout/common/shortcuts/shortcuts.types';
-import { ShortcutsService } from 'app/layout/common/shortcuts/shortcuts.service';
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	OnDestroy,
+	OnInit,
+	TemplateRef,
+	ViewChild,
+	ViewContainerRef,
+	ViewEncapsulation,
+} from "@angular/core";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import { Overlay, OverlayRef } from "@angular/cdk/overlay";
+import { TemplatePortal } from "@angular/cdk/portal";
+import { MatButton } from "@angular/material/button";
+import { Subject, takeUntil } from "rxjs";
+import { Shortcut } from "app/layout/common/shortcuts/shortcuts.types";
+import { ShortcutsService } from "app/layout/common/shortcuts/shortcuts.service";
 
 @Component({
-    selector       : 'shortcuts',
-    templateUrl    : './shortcuts.component.html',
-    encapsulation  : ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'shortcuts'
+	selector: "shortcuts",
+	templateUrl: "./shortcuts.component.html",
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	exportAs: "shortcuts",
 })
-export class ShortcutsComponent implements OnInit, OnDestroy
-{
-    @ViewChild('shortcutsOrigin') private _shortcutsOrigin: MatButton;
-    @ViewChild('shortcutsPanel') private _shortcutsPanel: TemplateRef<any>;
+export class ShortcutsComponent implements OnInit, OnDestroy {
+	@ViewChild("shortcutsOrigin") private _shortcutsOrigin: MatButton;
+	@ViewChild("shortcutsPanel") private _shortcutsPanel: TemplateRef<any>;
 
-    mode: 'view' | 'modify' | 'add' | 'edit' = 'view';
-    shortcutForm: FormGroup;
-    shortcuts: Shortcut[];
-    private _overlayRef: OverlayRef;
-    private _unsubscribeAll: Subject<any> = new Subject<any>();
+	mode: "view" | "modify" | "add" | "edit" = "view";
+	shortcutForm: UntypedFormGroup;
+	shortcuts: Shortcut[];
+	private _overlayRef: OverlayRef;
+	private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-    /**
-     * Constructor
-     */
-    constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _formBuilder: FormBuilder,
-        private _shortcutsService: ShortcutsService,
-        private _overlay: Overlay,
-        private _viewContainerRef: ViewContainerRef
-    )
-    {
-    }
+	/**
+	 * Constructor
+	 */
+	constructor(
+		private _changeDetectorRef: ChangeDetectorRef,
+		private _formBuilder: UntypedFormBuilder,
+		private _shortcutsService: ShortcutsService,
+		private _overlay: Overlay,
+		private _viewContainerRef: ViewContainerRef
+	) {}
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------
+	// @ Lifecycle hooks
+	// -----------------------------------------------------------------------------------------------------
 
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Initialize the form
-        this.shortcutForm = this._formBuilder.group({
-            id         : [null],
-            label      : ['', Validators.required],
-            description: [''],
-            icon       : ['', Validators.required],
-            link       : ['', Validators.required],
-            useRouter  : ['', Validators.required]
-        });
+	/**
+	 * On init
+	 */
+	ngOnInit(): void {
+		// Initialize the form
+		this.shortcutForm = this._formBuilder.group({
+			id: [null],
+			label: ["", Validators.required],
+			description: [""],
+			icon: ["", Validators.required],
+			link: ["", Validators.required],
+			useRouter: ["", Validators.required],
+		});
+		// Load the shortcuts
+		this.shortcuts = [
+			{
+				id: "a1ae91d3-e2cb-459b-9be9-a184694f548b",
+				label: "Changelog",
+				description: "List of changes",
+				icon: "heroicons_outline:clipboard-list",
+				link: "/help-center/change-log",
+				useRouter: true,
+			},
+			{
+				id: "2496f42e-2f25-4e34-83d5-3ff9568fd984",
+				label: "Help center",
+				description: "FAQs and guides",
+				icon: "heroicons_outline:support",
+				link: "/help-center",
+				useRouter: true,
+			},
+			{
+				id: "3c48e75e-2ae7-4b73-938a-12dc655be28b",
+				label: "Dashboard",
+				description: "User analytics",
+				icon: "heroicons_outline:chart-pie",
+				link: "/landing",
+				useRouter: true,
+			},
+			{
+				id: "0a240ab8-e19d-4503-bf68-20013030d526",
+				label: "Reload",
+				description: "Reload the app",
+				icon: "heroicons_outline:refresh",
+				link: "/dashboards/project",
+				useRouter: false,
+			},
+		];
+		// Get the shortcuts
+		// this._shortcutsService.shortcuts$.pipe(takeUntil(this._unsubscribeAll)).
+		//     subscribe((shortcuts: Shortcut[]) => {
 
-        // Get the shortcuts
-        this._shortcutsService.shortcuts$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((shortcuts: Shortcut[]) => {
+		//       // Mark for check
+		//       this._changeDetectorRef.markForCheck();
+		//     });
+	}
 
-                // Load the shortcuts
-                this.shortcuts = shortcuts;
+	/**
+	 * On destroy
+	 */
+	ngOnDestroy(): void {
+		// Unsubscribe from all subscriptions
+		this._unsubscribeAll.next(null);
+		this._unsubscribeAll.complete();
 
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
-    }
+		// Dispose the overlay
+		if (this._overlayRef) {
+			this._overlayRef.dispose();
+		}
+	}
 
-    /**
-     * On destroy
-     */
-    ngOnDestroy(): void
-    {
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next(null);
-        this._unsubscribeAll.complete();
+	// -----------------------------------------------------------------------------------------------------
+	// @ Public methods
+	// -----------------------------------------------------------------------------------------------------
 
-        // Dispose the overlay
-        if ( this._overlayRef )
-        {
-            this._overlayRef.dispose();
-        }
-    }
+	/**
+	 * Open the shortcuts panel
+	 */
+	openPanel(): void {
+		// Return if the shortcuts panel or its origin is not defined
+		if (!this._shortcutsPanel || !this._shortcutsOrigin) {
+			return;
+		}
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
+		// Make sure to start in 'view' mode
+		this.mode = "view";
 
-    /**
-     * Open the shortcuts panel
-     */
-    openPanel(): void
-    {
-        // Return if the shortcuts panel or its origin is not defined
-        if ( !this._shortcutsPanel || !this._shortcutsOrigin )
-        {
-            return;
-        }
+		// Create the overlay if it doesn't exist
+		if (!this._overlayRef) {
+			this._createOverlay();
+		}
 
-        // Make sure to start in 'view' mode
-        this.mode = 'view';
+		// Attach the portal to the overlay
+		this._overlayRef.attach(new TemplatePortal(this._shortcutsPanel, this._viewContainerRef));
+	}
 
-        // Create the overlay if it doesn't exist
-        if ( !this._overlayRef )
-        {
-            this._createOverlay();
-        }
+	/**
+	 * Close the shortcuts panel
+	 */
+	closePanel(): void {
+		this._overlayRef.detach();
+	}
 
-        // Attach the portal to the overlay
-        this._overlayRef.attach(new TemplatePortal(this._shortcutsPanel, this._viewContainerRef));
-    }
+	/**
+	 * Change the mode
+	 */
+	changeMode(mode: "view" | "modify" | "add" | "edit"): void {
+		// Change the mode
+		this.mode = mode;
+	}
 
-    /**
-     * Close the messages panel
-     */
-    closePanel(): void
-    {
-        this._overlayRef.detach();
-    }
+	/**
+	 * Prepare for a new shortcut
+	 */
+	newShortcut(): void {
+		// Reset the form
+		this.shortcutForm.reset();
 
-    /**
-     * Change the mode
-     */
-    changeMode(mode: 'view' | 'modify' | 'add' | 'edit'): void
-    {
-        // Change the mode
-        this.mode = mode;
-    }
+		// Enter the add mode
+		this.mode = "add";
+	}
 
-    /**
-     * Prepare for a new shortcut
-     */
-    newShortcut(): void
-    {
-        // Reset the form
-        this.shortcutForm.reset();
+	/**
+	 * Edit a shortcut
+	 */
+	editShortcut(shortcut: Shortcut): void {
+		// Reset the form with the shortcut
+		this.shortcutForm.reset(shortcut);
 
-        // Enter the add mode
-        this.mode = 'add';
-    }
+		// Enter the edit mode
+		this.mode = "edit";
+	}
 
-    /**
-     * Edit a shortcut
-     */
-    editShortcut(shortcut: Shortcut): void
-    {
-        // Reset the form with the shortcut
-        this.shortcutForm.reset(shortcut);
+	/**
+	 * Save shortcut
+	 */
+	save(): void {
+		// Get the data from the form
+		const shortcut = this.shortcutForm.value;
 
-        // Enter the edit mode
-        this.mode = 'edit';
-    }
+		// If there is an id, update it...
+		if (shortcut.id) {
+			this._shortcutsService.update(shortcut.id, shortcut).subscribe();
+		}
+		// Otherwise, create a new shortcut...
+		else {
+			this._shortcutsService.create(shortcut).subscribe();
+		}
 
-    /**
-     * Save shortcut
-     */
-    save(): void
-    {
-        // Get the data from the form
-        const shortcut = this.shortcutForm.value;
+		// Go back the modify mode
+		this.mode = "modify";
+	}
 
-        // If there is an id, update it...
-        if ( shortcut.id )
-        {
-            this._shortcutsService.update(shortcut.id, shortcut).subscribe();
-        }
-        // Otherwise, create a new shortcut...
-        else
-        {
-            this._shortcutsService.create(shortcut).subscribe();
-        }
+	/**
+	 * Delete shortcut
+	 */
+	delete(): void {
+		// Get the data from the form
+		const shortcut = this.shortcutForm.value;
 
-        // Go back the modify mode
-        this.mode = 'modify';
-    }
+		// Delete
+		this._shortcutsService.delete(shortcut.id).subscribe();
 
-    /**
-     * Delete shortcut
-     */
-    delete(): void
-    {
-        // Get the data from the form
-        const shortcut = this.shortcutForm.value;
+		// Go back the modify mode
+		this.mode = "modify";
+	}
 
-        // Delete
-        this._shortcutsService.delete(shortcut.id).subscribe();
+	/**
+	 * Track by function for ngFor loops
+	 *
+	 * @param index
+	 * @param item
+	 */
+	trackByFn(index: number, item: any): any {
+		return item.id || index;
+	}
 
-        // Go back the modify mode
-        this.mode = 'modify';
-    }
+	// -----------------------------------------------------------------------------------------------------
+	// @ Private methods
+	// -----------------------------------------------------------------------------------------------------
 
-    /**
-     * Track by function for ngFor loops
-     *
-     * @param index
-     * @param item
-     */
-    trackByFn(index: number, item: any): any
-    {
-        return item.id || index;
-    }
+	/**
+	 * Create the overlay
+	 */
+	private _createOverlay(): void {
+		// Create the overlay
+		this._overlayRef = this._overlay.create({
+			hasBackdrop: true,
+			backdropClass: "fuse-backdrop-on-mobile",
+			scrollStrategy: this._overlay.scrollStrategies.block(),
+			positionStrategy: this._overlay
+				.position()
+				.flexibleConnectedTo(this._shortcutsOrigin._elementRef.nativeElement)
+				.withLockedPosition(true)
+				.withPush(true)
+				.withPositions([
+					{
+						originX: "start",
+						originY: "bottom",
+						overlayX: "start",
+						overlayY: "top",
+					},
+					{
+						originX: "start",
+						originY: "top",
+						overlayX: "start",
+						overlayY: "bottom",
+					},
+					{
+						originX: "end",
+						originY: "bottom",
+						overlayX: "end",
+						overlayY: "top",
+					},
+					{
+						originX: "end",
+						originY: "top",
+						overlayX: "end",
+						overlayY: "bottom",
+					},
+				]),
+		});
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Private methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Create the overlay
-     */
-    private _createOverlay(): void
-    {
-        // Create the overlay
-        this._overlayRef = this._overlay.create({
-            hasBackdrop     : true,
-            backdropClass   : 'fuse-backdrop-on-mobile',
-            scrollStrategy  : this._overlay.scrollStrategies.block(),
-            positionStrategy: this._overlay.position()
-                                  .flexibleConnectedTo(this._shortcutsOrigin._elementRef.nativeElement)
-                                  .withLockedPosition(true)
-                                  .withPush(true)
-                                  .withPositions([
-                                      {
-                                          originX : 'start',
-                                          originY : 'bottom',
-                                          overlayX: 'start',
-                                          overlayY: 'top'
-                                      },
-                                      {
-                                          originX : 'start',
-                                          originY : 'top',
-                                          overlayX: 'start',
-                                          overlayY: 'bottom'
-                                      },
-                                      {
-                                          originX : 'end',
-                                          originY : 'bottom',
-                                          overlayX: 'end',
-                                          overlayY: 'top'
-                                      },
-                                      {
-                                          originX : 'end',
-                                          originY : 'top',
-                                          overlayX: 'end',
-                                          overlayY: 'bottom'
-                                      }
-                                  ])
-        });
-
-        // Detach the overlay from the portal on backdrop click
-        this._overlayRef.backdropClick().subscribe(() => {
-            this._overlayRef.detach();
-        });
-    }
+		// Detach the overlay from the portal on backdrop click
+		this._overlayRef.backdropClick().subscribe(() => {
+			this._overlayRef.detach();
+		});
+	}
 }

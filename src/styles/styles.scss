@@ -2,3 +2,1029 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
+
+.p-datatable table {
+	width: 100% !important;
+}
+
+.p-picklist-buttons.p-picklist-source-controls {
+	display: none;
+}
+
+.p-picklist-buttons.p-picklist-target-controls {
+	display: none;
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+
+.dark,
+.dark .dark\:bg-card,
+.dark .dark\:shadow-none,
+.dark fuse-vertical-navigation {
+	background-color: #1d1f21 !important;
+	border-color: #444746 !important;
+}
+
+.dark .bg-default > *,
+.bg-gray-900 {
+	background-color: #212121 !important;
+}
+
+.dark .dark\:bg-default {
+	background-color: #212121 !important;
+}
+
+.dark .p-datatable .p-datatable-tbody > tr,
+.dark .p-dialog .p-dialog-content,
+.dark .p-dialog .p-dialog-header,
+.dark .p-paginator,
+.dark .p-datatable .p-datatable-header,
+.dark .p-datatable-thead,
+.dark .p-datatable .p-datatable-thead > tr > th,
+.dark .p-dropdown-panel,
+.dark .p-dropdown,
+.dark .p-menu.p-menu-overlay,
+.dark .p-dialog .p-dialog-footer,
+.dark .p-card {
+	background-color: #212121 !important;
+	border-color: #444746 !important;
+}
+
+// .dark p-datatable-header ng-star-inserted,
+// .dark .p-inputtext {
+// 	background-color: #21262d !important;
+// }
+
+.dark .p-button {
+	background-color: #21262d !important;
+}
+
+.dark .p-datatable .p-datatable-tbody > tr > td {
+	border-color: #444746 !important;
+}
+
+.dark .mat-checkbox-background {
+	background-color: white !important;
+}
+
+.dark .ck.ck-editor__main > .ck-editor__editable {
+	background: black;
+}
+
+.ck-editor__editable_inline {
+	min-height: 200px !important;
+}
+.ck-editor__editable {
+	max-height: 300px;
+}
+.dark .ck.ck-toolbar,
+.dark .ck.ck-list,
+.dark .ck.ck-input,
+.dark .ck .ck-media-form,
+.dark .ck {
+	background: black;
+}
+
+.dark .ck .ck-label {
+	color: black !important;
+}
+.dark span {
+	color: white !important;
+}
+.p-datatable .p-datatable-header {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+	border-width: 1px;
+}
+.light .p-button {
+	color: #4f46e5;
+}
+
+.p-dialog-content {
+	overflow-y: auto !important;
+}
+
+.light .p-fileupload-choose {
+	color: white !important;
+}
+
+body.dark .mat-stepper-horizontal,
+body.dark .mat-stepper-vertical,
+body .dark .mat-stepper-horizontal,
+body .dark .mat-stepper-vertical {
+	background-color: #333333;
+}
+
+body.dark .mat-dialog-container,
+body .dark .mat-dialog-container {
+	box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+	background: #333333;
+	color: white;
+}
+body.dark .mat-select-panel,
+body .dark .mat-select-panel {
+	background: #333333;
+}
+
+.p-datatable .p-datatable-tbody > tr.p-highlight {
+	background: rgb(97 172 225);
+	color: rgb(255 255 255);
+}
+
+.dark .p-datatable .p-datatable-tbody > tr.p-highlight {
+	background: black !important;
+	color: rgba(255, 255, 255, 0.87);
+	z-index: 5000;
+}
+.p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):hover {
+	background: #b8def9bf;
+}
+
+.p-component {
+	font-size: 0.875rem;
+}
+
+.p-sortable-column .pi {
+	font-size: 0.75rem;
+}
+
+.p-multiselect .p-multiselect-label {
+	padding: 0.5rem 0.75rem;
+}
+
+.p-button.p-button-sm {
+	padding: 0.5rem 0.75rem;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page,
+.p-paginator .p-paginator-first,
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-last {
+	height: 35px;
+	width: 35px;
+}
+
+.p-paginator .p-dropdown {
+	height: 35px;
+}
+
+.p-inputtext {
+	padding: 0.5rem;
+}
+
+.p-dropdown .p-dropdown-trigger {
+	width: 35px;
+}
+
+.std-table-height > div {
+	min-height: 500px;
+}
+
+.no-table-top > div {
+	margin-top: 0px !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+	// border-color: #259bee8f;
+	// background: #6dbff8;
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+	// border-color: #259bee8f;
+	// background: #6dbff8;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+	// border-color: #6dbff8;
+}
+
+.p-button {
+	// border: 1px solid #6dbff8;
+}
+
+.p-button:enabled:hover {
+	// background: #259bee !important;
+	// color: #ffffff !important;
+	// border-color: #6abdf7;
+}
+
+/* Styles for tab labels */
+.mat-tab-label {
+	min-width: 25px !important;
+	padding: 5px;
+	background-color: transparent;
+	color: red;
+	font-weight: 700;
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+	min-width: 25px !important;
+	padding: 5px;
+	background-color: transparent;
+	color: red;
+	font-weight: 700;
+}
+
+/* Styles for the ink bar */
+.mat-ink-bar {
+	background-color: green;
+}
+
+.mc-table {
+	margin: 1rem;
+
+	.p-tabview {
+		width: 100% !important;
+	}
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+	background: #ffffff;
+	// border-color: #6dbff8;
+	// color: #6dbff8;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+	// box-shadow: inset 0 0 0 1px #6dbff8;
+}
+
+.email_settings {
+	.p-card {
+		box-shadow: none;
+	}
+	.p-card-body {
+		width: 50rem !important;
+	}
+}
+
+.p-button:focus {
+	// box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #259bee, 0 1px 2px 0 rgba(0, 0, 0, 0);
+}
+
+.p-button:enabled:active {
+	// border-color: #259bee;
+}
+
+.editor {
+	.p-card .p-card-subtitle {
+		font-size: large;
+	}
+}
+
+.p-inputtext:enabled:focus {
+	outline: 0 none;
+	outline-offset: 0;
+	// box-shadow: 0 0 0 1px #4a82a8;
+	// border-color: #6dbff8;
+}
+
+.std-page-margin {
+	margin: 1rem;
+}
+
+.std-top-left-spacing {
+	margin: 1rem;
+}
+// Dark Theme Changes ***********
+.p-column-filter-overlay {
+	background: theme("colors.inherit");
+}
+.p-multiselect-panel {
+	background: var(--fuse-border);
+}
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item {
+	margin: 0px 0 2px 0;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
+	background: #fafafa;
+	background: var(--is-dark, #1e293b) !important;
+}
+
+.p-multiselect-panel .p-multiselect-header {
+	background: var(--is-dark, #1e293b) !important;
+}
+
+// Dark Theme Changes ***********
+
+.p-datatable .p-sortable-column.p-highlight {
+	// color: #6dbff8;
+}
+
+.p-datatable .p-sortable-column:focus {
+	// box-shadow: inset 0 0 0 0.15rem #6dbff8;
+}
+
+.p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+	// color: #6dbff8;
+}
+
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+	// color: #6dbff8;
+}
+
+.p-datatable .p-sortable-column.p-highlight:hover {
+	// color: #6dbff8;
+}
+
+.p-datatable .p-datatable-tbody > tr.p-highlight {
+	.highlighted-col {
+		color: inherit !important;
+	}
+}
+
+.p-column-filter-menu-button:focus {
+	box-shadow: 0 0 0 1px #6366f100;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.p-button.p-button-secondary.p-button-text,
+.p-buttonset.p-button-secondary > .p-button.p-button-text,
+.p-splitbutton.p-button-secondary > .p-button.p-button-text {
+	background-color: transparent !important;
+	color: #64748b !important;
+	border-color: #403939;
+}
+
+.p-button.p-button-secondary.p-button-outlined,
+.p-buttonset.p-button-secondary > .p-button.p-button-outlined,
+.p-splitbutton.p-button-secondary > .p-button.p-button-outlined {
+	background-color: transparent !important;
+	color: #64748b !important;
+	border: 1px solid;
+}
+
+.flex-auto {
+	position: relative;
+	.modal-close {
+		position: absolute !important;
+		right: -24px !important;
+		display: flex !important;
+		justify-content: flex-end !important;
+		top: -25px !important;
+
+		.p-button.p-button-danger.p-button-text {
+			background-color: transparent !important;
+			color: #9aa8bc !important;
+			border-color: transparent !important;
+		}
+
+		.p-button.p-button-danger:enabled:focus {
+			box-shadow: none;
+		}
+	}
+}
+
+.mat-dialog-title {
+	margin: 0 0 10px !important;
+}
+
+.p-tabview {
+	border: 1px solid #e5e7eb !important;
+}
+
+.panel-header {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.p-dropdown .p-dropdown-label.p-placeholder {
+	color: #94a3b8;
+	font-size: inherit;
+}
+
+.p-card-title {
+	font-weight: 600 !important;
+	font-size: 1.125rem !important;
+}
+
+.colHeader {
+	padding: 0.375rem 0.75rem;
+	text-align: left;
+	padding: 0.75rem 1.5rem;
+	border: 1px solid #f4f4f5;
+	border-width: 0 0 1px 0;
+	font-weight: 500;
+	color: #6b7280;
+	background: #f0f0f0;
+	transition: none;
+}
+
+.ht_master .wtHolder {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.p-multiselect .p-multiselect-label.p-placeholder {
+	color: #94a3b8;
+}
+
+.blue-circle {
+	background: #6dbff8;
+	width: 120px;
+	height: 120px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	border-radius: 120px;
+}
+
+.p-dropdown:not(.p-disabled).p-focus {
+	outline: 0 none;
+	outline-offset: 0;
+	// box-shadow: 0 0 0 1px #6dbff8;
+	// border-color: #6dbff8;
+}
+
+body.light .mat-step-header .mat-step-icon-selected {
+	// background-color: #1995f1c9;
+	color: #ffffff;
+}
+
+.mat-step-header .mat-step-icon-state-edit {
+	// background-color: #1995f1c9;
+	color: #ffffff;
+}
+
+body.light .mat-step-header .mat-step-icon {
+	color: #ffffff;
+}
+
+.mat-step-header:hover {
+	border-radius: 25px;
+	margin: 5px;
+	height: 50px;
+}
+
+.mat-step-header.cdk-program-focused {
+	border-radius: 25px;
+	margin: 5px;
+	height: 50px;
+}
+
+.tab-header {
+	background-color: white;
+	padding: 0.5rem 1rem;
+}
+
+///////************* Classic layout css ********************************
+// classic-layout {
+// 	height: 100vh;
+// }
+
+// body {
+// 	overflow: hidden;
+// }
+
+.mat-card-header-text {
+	margin: 0 0px !important;
+}
+///////************* Classic layout css ********************************
+
+.common-panel {
+	.p-panel-header {
+		padding: 0.5rem 1.25rem !important;
+	}
+}
+
+#output1 {
+	table {
+		min-width: 55vw;
+		max-width: 68vw;
+	}
+}
+
+// pivot table
+.pvtUi select {
+	height: 45px;
+	box-shadow: none;
+	font-size: 12px;
+	margin: 5px 0;
+	display: block;
+	width: 100%;
+	padding: 6px 12px;
+	font-size: 12px;
+	line-height: 1.35;
+	color: #555555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #e4eaec;
+	border-radius: 3px;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+common-pivot-table {
+	width: 100% !important;
+}
+.pvtUi {
+	width: inherit;
+}
+.pvtTableRendererHolder {
+	table {
+		width: 100%;
+	}
+}
+
+.pvtUiCell {
+	width: 110px;
+}
+
+// pivot table
+
+.notification .mat-dialog-container {
+	padding-bottom: 0;
+	.mat-dialog-title {
+		margin: -24px -24px 0 -24px !important;
+		padding: 4px 15px;
+		align-items: center;
+		background-color: #e6ebef2b;
+		border: 1px solid #dee2e6;
+	}
+	.mat-dialog-actions {
+		background-color: #e6ebef2b;
+		margin: 0 -24px -24px -24px;
+		padding: 5px 24px;
+		justify-content: flex-end;
+	}
+	.mat-dialog-content {
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+	}
+	.modal-close {
+		.mat-icon-button {
+			background-color: none !important;
+			left: 8px !important;
+		}
+	}
+}
+
+.updated-modal .mat-dialog-container {
+	.mat-dialog-title {
+		margin: -24px -24px 0 -24px !important;
+		padding: 10px 15px;
+		align-items: center;
+		background-color: #e6ebef2b;
+		border: 1px solid #dee2e6;
+	}
+	.mat-dialog-actions {
+		background-color: #e6ebef2b;
+		margin: 0 -24px -24px -24px;
+		padding: 5px 24px;
+		justify-content: flex-end;
+	}
+	.mat-dialog-content {
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+	}
+	.modal-close {
+		.mat-icon-button {
+			background-color: none !important;
+			left: 8px !important;
+		}
+	}
+}
+
+.dark .updated-modal .mat-dialog-container {
+	.mat-dialog-title {
+		border: none !important;
+	}
+}
+
+.mat-dialog-container {
+	border-radius: 8px !important;
+}
+
+body.light .mat-form-field-appearance-fill.mat-form-field-disabled .mat-form-field-flex,
+body .light .mat-form-field-appearance-fill.mat-form-field-disabled .mat-form-field-flex {
+	background-color: #eaeaea !important;
+}
+
+.p-disabled,
+.p-disabled {
+	background-color: #eaeaea !important;
+}
+
+.mat-card-header-for-pages {
+	border: 1px solid var(--fuse-border);
+	margin-top: -16px !important;
+	background: #f8f9fa;
+	margin: -16px;
+	padding: 1rem 1rem 1rem 1.25rem;
+	margin-bottom: 2rem;
+
+	.mat-card-title {
+		margin-bottom: 0px !important;
+	}
+}
+
+// --------primeNG - dropdown
+
+.p-dropdown,
+.p-multiselect {
+	border-radius: 6px;
+}
+
+p-dropdown.ng-invalid.ng-touched > div {
+	box-shadow: 0 0 0 0.05em #f40000;
+	border: 1px solid #d40000;
+}
+
+p-dropdown.ng-invalid.ng-touched .p-dropdown:not(.p-disabled):hover {
+	box-shadow: 0 0 0 0.05em #f40000;
+	border: 1px solid #d40000;
+}
+
+.form-element > .p-dropdown {
+	min-height: 48px;
+	// padding: 5px 16px;
+}
+
+.form-element > .p-multiselect {
+	min-height: 48px;
+	// padding: 5px 16px;
+	display: flex;
+	align-items: center;
+}
+
+p-multiselect.ng-invalid.ng-touched > div {
+	box-shadow: 0 0 0 0.05em #f40000;
+	border: 1px solid #d40000;
+}
+
+p-multiselect.ng-invalid.ng-touched .p-multiselect:not(.p-disabled):hover {
+	box-shadow: 0 0 0 0.05em #f40000;
+	border: 1px solid #d40000;
+}
+
+p-calendar.ng-invalid.ng-touched > span {
+	box-shadow: 0 0 0 0.05em #f40000;
+	border: 1px solid #d40000;
+	border-radius: 6px;
+}
+
+.p-calendar-disabled {
+	background-color: #eaeaea !important;
+}
+
+.form-element {
+	.p-inputtext {
+		padding: 13.7px 16px;
+		border-radius: 6px;
+	}
+}
+input.form-element {
+	padding: 13.7px 0 !important;
+	border-radius: 6px;
+}
+
+// p-dropdown.ng-invalid.ng-untouched.ui-inputwrapper-focus:not(form) > div {
+// 	box-shadow: 0 0 0 0.05em #f40000;
+// 	border: 1px solid #d40000;
+// 	border-radius: 2px;
+// }
+
+// --------primeNG - dropdown
+
+.border-radius {
+	.p-datatable-sm {
+		border-radius: 6px;
+	}
+	.p-datatable-header {
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+	}
+
+	.p-paginator-bottom {
+		border-bottom-left-radius: 6px;
+		border-bottom-right-radius: 6px;
+	}
+}
+
+// ***************** handsontable ******************
+.handsontable th {
+	background-color: var(--is-dark, #212121) !important;
+}
+
+.handsontable .relative {
+	background-color: var(--is-dark, #212121) !important;
+}
+
+.handsontable td {
+	background-color: var(--is-dark, #212121);
+	padding: 0.5rem 0.75rem;
+	text-align: left;
+	border: 1px solid #f4f4f5;
+	border-color: var(--fuse-border);
+	border-width: 0 0 1px 0;
+	padding: 1rem 1.5rem;
+	color: var(--is-dark, white);
+}
+
+.ht_master:not(.innerBorderInlineStart):not(.emptyColumns) ~ .handsontable tbody tr th,
+.ht_master:not(.innerBorderInlineStart):not(.emptyColumns) ~ .handsontable:not(.ht_clone_top) thead tr th:first-child {
+	border-right-width: 0;
+	border-left: 1px solid var(--fuse-border);
+}
+
+.handsontable.htRowHeaders thead tr th:nth-child(2) {
+	border-left: 1px solid var(--fuse-border);
+}
+
+.handsontable th,
+.handsontable td {
+	border-right: 1px solid var(--fuse-border);
+}
+
+.p-datatable.p-datatable-sm .p-datatable-thead > tr > th:first-child {
+	padding-left: 1.2rem;
+}
+
+.p-datatable.p-datatable-sm .p-datatable-tbody > tr > td:first-child {
+	padding-left: 1.2rem;
+}
+.handsontable th:last-child {
+	border-left: none;
+	border-right: 1px solid #efe9ea;
+	border-bottom: 1px solid #efe9ea;
+	border-color: var(--fuse-border);
+}
+.handsontable .ht_clone_top th:nth-child(2) {
+	border-left-width: 0;
+	border-right: 1px solid #efe9ea;
+	border-color: var(--fuse-border);
+}
+.handsontable th:first-child,
+.handsontable th:nth-child(2),
+.handsontable td:first-of-type {
+	border-color: var(--fuse-border);
+}
+.handsontable {
+	th > div {
+		border-bottom: 1px solid #efe9ea;
+		border-color: var(--fuse-border);
+	}
+
+	.ht__highlight,
+	.ht__active_highlight {
+		div {
+			border-bottom: none;
+		}
+	}
+	.columnSorting.sortAction:hover {
+		text-decoration: none;
+	}
+
+	td.listbox {
+		padding: 0.5rem 0.5rem;
+	}
+	.ht__highlight {
+		.rowHeader {
+			background-color: #dcdcdc !important;
+		}
+	}
+	.relative {
+		text-align: start;
+		background-color: #f8f9fa;
+		.colHeader {
+			background-color: #f8f9fa;
+
+			text-align: left;
+			padding: 1rem 1rem;
+			border: none;
+			border-width: 0 0 1px 0;
+			font-weight: 600;
+			color: #495057;
+			background: #f8f9fa;
+			background-color: var(--is-dark, #212121);
+			transition: box-shadow 0.2s;
+		}
+
+		.rowHeader {
+			display: flex;
+			margin-top: 15px;
+			justify-content: center;
+			background-color: #f0f0f0;
+			background-color: var(--is-dark, #212121);
+		}
+		.cornerHeader {
+			border: none;
+		}
+	}
+
+	.ht__active_highlight {
+		.rowHeader {
+			background-color: var(--fuse-primary);
+		}
+	}
+}
+.handsontable tr:first-child th,
+.handsontable tr:first-child td {
+	border-top: none;
+}
+
+.handsontable th:last-child {
+	border-right: none !important;
+}
+
+// ***************** handsontable ******************
+
+// ***************** p-panel-heading ******************
+.p-panel-header {
+	padding: 22px 9px;
+
+	.p-panel-title {
+		font-weight: 600 !important;
+		font-size: 1.125rem !important;
+		line-height: 32px;
+	}
+}
+
+.p-tabview-title {
+	line-height: 32px !important;
+}
+
+// ***************** p-panel-heading ******************
+
+.form-element-label {
+	margin-top: -4px;
+	margin-bottom: 6px;
+}
+
+.panel-header-for-pages {
+	margin: 0px 0px 0px -9px;
+	height: 58px;
+	padding: 12px 12px 11px 24px !important;
+	background-color: #f8f9fa;
+	border: 1px solid #e9ecef;
+}
+
+// ********************************  For any form element that is place inside tab header ********************************
+.tab-header-element {
+	line-height: 19px;
+	position: relative;
+
+	.p-dropdown,
+	.p-multiselect {
+		border-radius: 6px;
+	}
+
+	.p-dropdown-label {
+		font-size: inherit;
+	}
+}
+
+// for TimePicker	************************************************
+.timepicker-overlay {
+	z-index: 1100 !important;
+}
+
+.timepicker-backdrop-overlay {
+	z-index: 1100 !important;
+}
+
+// query-builder ************************************************
+
+.q-ruleset {
+	margin-top: 2rem !important;
+	border: 1px solid #cccccc2b !important;
+}
+
+.q-rule {
+	border: 1px solid #cccccc2b !important;
+}
+
+.query-builder-field {
+	.mat-form-field-wrapper {
+		margin-bottom: 0 !important;
+		margin-top: 5px !important;
+	}
+}
+
+.q-row {
+	background-color: #f8f9fa !important;
+}
+// ***** query Builder style *******
+
+.mat-list-base .mat-list-option {
+	font-size: 0.875rem !important;
+}
+
+.mat-list-base {
+	max-height: 15rem;
+	overflow: auto;
+	padding-top: 0 !important;
+}
+
+.mat-pseudo-checkbox-checked {
+	background-color: var(--fuse-primary) !important;
+}
+
+.mat-list-single-selected-option {
+	background-color: var(--fuse-primary) !important;
+}
+
+mat-selection-list.ng-invalid.ng-touched {
+	border: 1px solid #d40000 !important;
+}
+
+// .mat-input-element:disabled {
+// 	color: #272727 !important;
+// }
+
+.disabled-gridster {
+	.gridster-row {
+		border-top: 1px solid #ffffff00 !important;
+		border-bottom: 1px solid #ffffff00 !important;
+	}
+
+	.gridster-column {
+		border-left: 1px solid #ffffff00 !important;
+		border-right: 1px solid #ffffff00 !important;
+	}
+}
+
+.dark .mat-card {
+	background: inherit !important;
+}
+
+.dark {
+	.p-tabview {
+		border: 1px solid var(--fuse-border) !important;
+	}
+
+	.p-tabview .p-tabview-panels {
+		background-color: var(--is-dark, #212121);
+	}
+
+	.p-tabview .p-tabview-nav {
+		border: 1px solid var(--fuse-border);
+	}
+
+	.p-tabview .p-tabview-nav {
+		background-color: var(--is-dark, #212121);
+	}
+
+	.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+		background-color: var(--is-dark, #212121);
+	}
+	.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+		background-color: var(--is-dark, #212121);
+	}
+
+	.p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+		background-color: var(--is-dark, #484747);
+	}
+}
+
+// loader For Table
+.p-component-overlay {
+	background-color: rgb(0 0 0 / 12%);
+}
+
+// read only Field
+.read-only {
+	.mat-form-field-outline {
+		background-color: #ecedee !important;
+	}
+}
+
+// disable Field
+.mat-form-field-disabled {
+	.mat-form-field-outline {
+		background-color: #ecedee !important;
+	}
+}
+
+.dark .mat-form-field.mat-form-field-appearance-outline .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-outline {
+	background-color: inherit !important;
+}
+
+// Notification alter style
+.mat-snack-bar-container {
+	padding: 0 !important;
+}
+
+body.light .mat-snack-bar-container,
+body.dark .mat-snack-bar-container {
+	background: none !important;
+	box-shadow: none !important;
+}
+
+fuse-alert .fuse-alert-container .fuse-alert-dismiss-button {
+	color: initial !important;
+}
+
+// Notification alter style
