@@ -67,18 +67,9 @@
                                 "input": "src/styles/theme-md-dark-lara.scss",
                                 "bundleName": "md-dark-lara",
                                 "inject": false
-                            },
-                            "node_modules/primeicons/primeicons.css",
-                            "node_modules/pivottable/dist/pivot.min.css",
-                            "src/assets/lib/css/nrecopivottableext.css",
-                            "src/assets/lib/css/pivot.css"
+                            }
                         ],
-                        "scripts": [
-                            "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/jquery-ui-dist/jquery-ui.min.js",
-                            "node_modules/pivottable/dist/pivot.min.js",
-                            "src/assets/lib/js/nrecopivottableext.js"
-                        ]
+                        "scripts": []
                     },
                     "configurations": {
                         "production": {
