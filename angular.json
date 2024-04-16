@@ -162,7 +162,7 @@
                     "options": {
                         "buildTarget": "chatBox:build:production",
                         "baseHref": "/theme/",
-                        "repo": "https://github.com/prashiln79/theme",
+                        "repo": "https://github.com/prashiln79/theme.git",
                         "dir": "dist/theme"
                     }
                 }
