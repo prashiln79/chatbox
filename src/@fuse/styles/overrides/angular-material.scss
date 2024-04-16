@@ -77,6 +77,8 @@
 /* ----------------------------------------------------------------------------------------------------- */
 /*  @ Buttons
 /* ----------------------------------------------------------------------------------------------------- */
+.mat-mdc-button-base,
+.mat-mdc-button,
 .mat-button,
 .mat-fab,
 .mat-flat-button,
@@ -101,7 +103,7 @@
 		z-index: 2; /* Move mat-button-wrapper above the ripple and focus overlay */
 	}
 
-	.mat-button-focus-overlay,
+	.mat-mdc-focus-indicator,
 	.mat-button-ripple {
 		z-index: 1;
 	}
@@ -126,6 +128,8 @@
 }
 
 /* Rounded design */
+.mat-mdc-button-base,
+.mat-mdc-button,
 .mat-button,
 .mat-flat-button,
 .mat-raised-button,
@@ -135,6 +139,8 @@
 }
 
 /* Target all buttons */
+.mat-mdc-button-base,
+.mat-mdc-button,
 .mat-button,
 .mat-fab,
 .mat-flat-button,
@@ -164,7 +170,7 @@
 	}
 
 	/* Add hover and focus style on all buttons */
-	.mat-button-focus-overlay {
+	.mat-mdc-focus-indicator {
 		@apply bg-gray-400 bg-opacity-20 dark:bg-black dark:bg-opacity-5 #{'!important'};
 	}
 
@@ -172,7 +178,7 @@
 	&.mat-primary,
 	&.mat-accent,
 	&.mat-warn {
-		.mat-button-focus-overlay {
+		.mat-mdc-focus-indicator {
 			background-color: rgba(0, 0, 0, 0.1) !important;
 		}
 	}
@@ -180,27 +186,28 @@
 	&:hover,
 	&.cdk-keyboard-focused,
 	&.cdk-program-focused {
-		.mat-button-focus-overlay {
+		.mat-mdc-focus-indicator {
 			opacity: 1 !important;
 		}
 	}
 
 	@media (hover: none) {
 		&:hover {
-			.mat-button-focus-overlay {
+			.mat-mdc-focus-indicator {
 				opacity: 0 !important;
 			}
 		}
 	}
 
 	&.mat-button-disabled {
-		.mat-button-focus-overlay {
+		.mat-mdc-focus-indicator {
 			opacity: 0 !important;
 		}
 	}
 }
 
 /* Transparent background buttons */
+.mat-mdc-button,
 .mat-button,
 .mat-icon-button,
 .mat-stroked-button {
@@ -226,27 +233,27 @@
 	}
 
 	/* Add hover and focus styles */
-	.mat-button-focus-overlay {
+	.mat-mdc-focus-indicator {
 		@apply bg-gray-400 bg-opacity-20 dark:bg-black dark:bg-opacity-5 #{'!important'};
 	}
 
 	/* On primary colored buttons, use the primary color as focus overlay */
 	&.mat-primary:not(.mat-button-disabled) {
-		.mat-button-focus-overlay {
+		.mat-mdc-focus-indicator {
 			@apply bg-primary #{'!important'};
 		}
 	}
 
 	/* On accent colored buttons, use the accent color as focus overlay */
 	&.mat-accent:not(.mat-button-disabled) {
-		.mat-button-focus-overlay {
+		.mat-mdc-focus-indicator {
 			@apply bg-accent #{'!important'};
 		}
 	}
 
 	/* On warn colored buttons, use the warn color as focus overlay */
 	&.mat-warn:not(.mat-button-disabled) {
-		.mat-button-focus-overlay {
+		.mat-mdc-focus-indicator {
 			@apply bg-warn #{'!important'};
 		}
 	}
@@ -257,7 +264,7 @@
 		&:hover,
 		&.cdk-keyboard-focused,
 		&.cdk-program-focused {
-			.mat-button-focus-overlay {
+			.mat-mdc-focus-indicator {
 				opacity: 0.1 !important;
 			}
 		}
@@ -266,21 +273,21 @@
 	&:hover,
 	&.cdk-keyboard-focused,
 	&.cdk-program-focused {
-		.mat-button-focus-overlay {
+		.mat-mdc-focus-indicator {
 			opacity: 1 !important;
 		}
 	}
 
 	@media (hover: none) {
 		&:hover {
-			.mat-button-focus-overlay {
+			.mat-mdc-focus-indicator {
 				opacity: 0 !important;
 			}
 		}
 	}
 
 	&.mat-button-disabled {
-		.mat-button-focus-overlay {
+		.mat-mdc-focus-indicator {
 			opacity: 0 !important;
 		}
 	}
@@ -389,7 +396,7 @@
 
 /* Fuse only uses 'fill' style form fields and therefore */
 /* only provides fixes and tweaks for that style */
-.mat-form-field.mat-form-field-appearance-fill {
+.mat-mdc-form-field.mat-form-field-appearance-fill {
 	/* Disabled */
 	&.mat-form-field-disabled {
 		opacity: 0.7 !important;
@@ -397,9 +404,9 @@
 
 	/* Invalid */
 	&.mat-form-field-invalid {
-		.mat-form-field-wrapper {
+		.mat-mdc-text-field-wrapper {
 			/* Border color */
-			.mat-form-field-flex {
+			.mat-mdc-form-field-flex {
 				@apply border-warn dark:border-warn #{'!important'};
 			}
 		}
@@ -407,9 +414,9 @@
 
 	/* Focused */
 	&.mat-focused {
-		.mat-form-field-wrapper {
+		.mat-mdc-text-field-wrapper {
 			/* Background color */
-			.mat-form-field-flex {
+			.mat-mdc-form-field-flex {
 				@apply bg-card dark:bg-card #{'!important'};
 			}
 		}
@@ -417,9 +424,9 @@
 
 	/* Focused and valid fields */
 	&.mat-focused:not(.mat-form-field-invalid) {
-		.mat-form-field-wrapper {
+		.mat-mdc-text-field-wrapper {
 			/* Border color */
-			.mat-form-field-flex {
+			.mat-mdc-form-field-flex {
 				@apply border-primary dark:border-primary #{'!important'};
 			}
 		}
@@ -462,17 +469,17 @@
 
 	/* Adjustments for mat-label */
 	&.mat-form-field-has-label {
-		.mat-form-field-wrapper {
+		.mat-mdc-text-field-wrapper {
 			margin-top: 24px;
 		}
 	}
 
 	/* Default style tweaks and enhancements */
-	.mat-form-field-wrapper {
+	.mat-mdc-text-field-wrapper {
 		margin-bottom: 16px;
 		padding-bottom: 0;
 
-		.mat-form-field-flex {
+		.mat-mdc-form-field-flex {
 			position: relative;
 			display: flex;
 			align-items: stretch;
@@ -733,8 +740,8 @@
 
 	/* Adds better alignment for textarea inputs */
 	&.fuse-mat-textarea {
-		.mat-form-field-wrapper {
-			.mat-form-field-flex {
+		.mat-mdc-text-field-wrapper {
+			.mat-mdc-form-field-flex {
 				.mat-form-field-prefix,
 				.mat-form-field-suffix {
 					align-items: flex-start;
@@ -753,7 +760,7 @@
 
 	/* Removes subscript space */
 	&.fuse-mat-no-subscript {
-		.mat-form-field-wrapper {
+		.mat-mdc-text-field-wrapper {
 			padding-bottom: 0;
 			margin-bottom: 0;
 
@@ -766,16 +773,16 @@
 
 	/* Rounded */
 	&.fuse-mat-rounded {
-		.mat-form-field-wrapper {
-			.mat-form-field-flex {
+		.mat-mdc-text-field-wrapper {
+			.mat-mdc-form-field-flex {
 				border-radius: 24px;
 			}
 		}
 
 		/* Emphasized affix */
 		&.fuse-mat-emphasized-affix {
-			.mat-form-field-wrapper {
-				.mat-form-field-flex {
+			.mat-mdc-text-field-wrapper {
+				.mat-mdc-form-field-flex {
 					.mat-form-field-prefix {
 						border-radius: 24px 0 0 24px;
 
@@ -830,8 +837,8 @@
 
 	/* Dense */
 	&.fuse-mat-dense {
-		.mat-form-field-wrapper {
-			.mat-form-field-flex {
+		.mat-mdc-text-field-wrapper {
+			.mat-mdc-form-field-flex {
 				min-height: 40px;
 
 				.mat-form-field-prefix,
@@ -868,16 +875,16 @@
 
 		/* Rounded */
 		&.fuse-mat-rounded {
-			.mat-form-field-wrapper {
-				.mat-form-field-flex {
+			.mat-mdc-text-field-wrapper {
+				.mat-mdc-form-field-flex {
 					border-radius: 20px;
 				}
 			}
 
 			/* Emphasized affix */
 			&.fuse-mat-emphasized-affix {
-				.mat-form-field-wrapper {
-					.mat-form-field-flex {
+				.mat-mdc-text-field-wrapper {
+					.mat-mdc-form-field-flex {
 						.mat-form-field-prefix {
 							border-radius: 20px 0 0 20px !important;
 						}
@@ -893,8 +900,8 @@
 
 	/* Emphasized affix */
 	&.fuse-mat-emphasized-affix {
-		.mat-form-field-wrapper {
-			.mat-form-field-flex {
+		.mat-mdc-text-field-wrapper {
+			.mat-mdc-form-field-flex {
 				.mat-form-field-prefix {
 					margin: 0 16px 0 -16px;
 					padding-left: 16px;
@@ -959,8 +966,8 @@
 
 	/* Bolder border width */
 	&.fuse-mat-bold {
-		.mat-form-field-wrapper {
-			.mat-form-field-flex {
+		.mat-mdc-text-field-wrapper {
+			.mat-mdc-form-field-flex {
 				border-width: 2px !important;
 			}
 		}
@@ -969,8 +976,8 @@
 
 /* Fix the outline appearance */
 .mat-form-field.mat-form-field-appearance-outline {
-	.mat-form-field-wrapper {
-		.mat-form-field-flex {
+	.mat-mdc-text-field-wrapper {
+		.mat-mdc-form-field-flex {
 			.mat-form-field-outline {
 				@apply text-gray-300 dark:text-gray-500 #{'!important'};
 			}
@@ -1011,6 +1018,9 @@
 /* ----------------------------------------------------------------------------------------------------- */
 /*  @ Inputs
 /* ----------------------------------------------------------------------------------------------------- */
+.mdc-text-field {
+	@apply p-0 #{'!important'};
+}
 .mat-input-element {
 	&::placeholder {
 		transition: none !important;
@@ -1082,6 +1092,10 @@
 	}
 }
 
+div[matformfieldlineripple] {
+	display: none;
+}
+
 /* ----------------------------------------------------------------------------------------------------- */
 /*  @ Paginator
 /* ----------------------------------------------------------------------------------------------------- */
@@ -1112,10 +1126,10 @@
 			.mat-paginator-page-size-select {
 				margin: 0;
 
-				.mat-form-field-wrapper {
+				.mat-mdc-text-field-wrapper {
 					margin-bottom: 0;
 
-					.mat-form-field-flex {
+					.mat-mdc-form-field-flex {
 						min-height: 32px;
 						padding: 0 10px;
 					}
