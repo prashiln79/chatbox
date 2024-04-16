@@ -9,7 +9,7 @@
     },
     "newProjectRoot": "projects",
     "projects": {
-        "riskanalysis": {
+        "chatBox": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -23,7 +23,8 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/riskanalysis",
+                        "baseHref": "/theme/",
+                        "outputPath": "dist/theme",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -37,16 +38,16 @@
                             "crypto-js/enc-base64"
                         ],
                         "assets": [
-                          "src/favicon-16x16.png",
-                          "src/favicon-32x32.png",
-                          "src/assets",
-                          {
-                            "glob": "_redirects",
-                            "input": "src",
-                            "output": "/"
-                          },
-                          "src/manifest.webmanifest",
-                          "src/manifest.webmanifest"
+                            "src/favicon-16x16.png",
+                            "src/favicon-32x32.png",
+                            "src/assets",
+                            {
+                                "glob": "_redirects",
+                                "input": "src",
+                                "output": "/"
+                            },
+                            "src/manifest.webmanifest",
+                            "src/manifest.webmanifest"
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
@@ -112,10 +113,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "riskanalysis:build:production"
+                            "browserTarget": "chatBox:build:production"
                         },
                         "development": {
-                            "browserTarget": "riskanalysis:build:development"
+                            "browserTarget": "chatBox:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -123,7 +124,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "riskanalysis:build"
+                        "browserTarget": "chatBox:build"
                     }
                 },
                 "test": {
@@ -135,11 +136,11 @@
                         "karmaConfig": "karma.conf.js",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                          "src/favicon-16x16.png",
-                          "src/favicon-32x32.png",
-                          "src/assets",
-                          "src/manifest.webmanifest",
-                          "src/manifest.webmanifest"
+                            "src/favicon-16x16.png",
+                            "src/favicon-32x32.png",
+                            "src/assets",
+                            "src/manifest.webmanifest",
+                            "src/manifest.webmanifest"
                         ],
                         "styles": [
                             "src/styles/styles.scss"
@@ -154,6 +155,15 @@
                             "src/**/*.ts",
                             "src/**/*.html"
                         ]
+                    }
+                },
+                "deploy": {
+                    "builder": "angular-cli-ghpages:deploy",
+                    "options": {
+                        "buildTarget": "chatBox:build:production",
+                        "baseHref": "/theme/",
+                        "repo": "https://github.com/prashiln79/theme",
+                        "dir": "dist/theme"
                     }
                 }
             }
