@@ -19,6 +19,8 @@ export const appRoutes: Route[] = [
 		},
 		children: [
 			{ path: "", loadChildren: () => import("app/modules/auth/sign-in/sign-in.module").then((m) => m.AuthSignInModule) },
+			{ path: "sign-in", loadChildren: () => import("app/modules/auth/sign-in/sign-in.module").then((m) => m.AuthSignInModule) },
+
 			{
 				path: "confirmation-required",
 				loadChildren: () =>
@@ -43,10 +45,18 @@ export const appRoutes: Route[] = [
 		resolve: {
 			initialData: InitialDataResolver,
 		},
+		data: {
+			layout: "centered",
+		},
 		children: [
 			{
 				path: "dashboard",
 				children: [{ path: "", loadChildren: () => import("app/modules/dashboard/dashboard.module").then((m) => m.DashboardModule) }],
+			},
+
+			{
+				path: "chats",
+				children: [{ path: "", loadChildren: () => import("app/modules/chat/chat.module").then((m) => m.ChatModule) }],
 			},
 		],
 	},
@@ -65,16 +75,5 @@ export const appRoutes: Route[] = [
 				loadChildren: () => import("app/modules/auth/unlock-session/unlock-session.module").then((m) => m.AuthUnlockSessionModule),
 			},
 		],
-	},
-
-	{
-		path: "chat",
-		canActivate: [NoAuthGuard],
-		canActivateChild: [NoAuthGuard],
-		component: LayoutComponent,
-		data: {
-			layout: "empty",
-		},
-		children: [{ path: "", loadChildren: () => import("app/modules/chat/chat.module").then((m) => m.ChatModule) }],
 	},
 ];

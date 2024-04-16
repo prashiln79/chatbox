@@ -7,6 +7,7 @@ import { ApiResponse } from "../../backend-api/models/api-response";
 import { LoginRequestModel } from "../../backend-api/models/requests/login.request.model";
 import { environment } from "../../../environments/environment";
 import { User } from "../user/user.types";
+import { Router } from "@angular/router";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {

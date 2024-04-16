@@ -4,9 +4,9 @@ import { NavigationService } from "app/core/navigation/navigation.service";
 import { NotificationsService } from "app/layout/common/notifications/notifications.service";
 import { ShortcutsService } from "app/layout/common/shortcuts/shortcuts.service";
 import { UserService } from "app/core/user/user.service";
-import { MessagesService } from "./layout/common/messages-unused/messages.service";
 import { QuickChatService } from "./layout/common/quick-chat-unused/quick-chat.service";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
+import { MessagesService } from "./layout/common/messages/messages.service";
 
 @Injectable({
 	providedIn: "root",

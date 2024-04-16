@@ -5,7 +5,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatChipsModule } from "@angular/material/chips";
 
 @NgModule({
-	imports: [CommonModule, FormsModule, ReactiveFormsModule, MatIconModule, MatChipsModule],
+	imports: [CommonModule, FormsModule, ReactiveFormsModule, MatIconModule,MatChipsModule],
 	exports: [CommonModule, FormsModule, ReactiveFormsModule, MatIconModule, MatChipsModule],
 })
 export class SharedModule {}

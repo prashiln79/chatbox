@@ -19,16 +19,11 @@ export const chatRoutes: Route[] = [
 				component: ChatsComponent,
 				children: [
 					{
-						path: "",
+						path: ":id",
 						component: ConversationComponent,
-						children: [
-							{
-								path: ":id",
-								resolve: {
-									conversation: ChatChatResolver,
-								},
-							},
-						],
+						resolve: {
+							conversation: ChatChatResolver,
+						},
 					},
 				],
 			},

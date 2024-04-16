@@ -55,7 +55,9 @@ export class AuthSignInComponent implements OnInit {
 	 * Sign in
 	 */
 	signIn(): void {
-		this._router.navigateByUrl("/dashboard");
+		sessionStorage.setItem("authenticated", "true");
+		this._router.navigateByUrl("/chats");
+
 		// Return if the form is invalid
 		// if (this.signInForm.invalid) {
 		// 	return;
