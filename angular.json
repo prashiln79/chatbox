@@ -37,14 +37,16 @@
                             "crypto-js/enc-base64"
                         ],
                         "assets": [
-                            "src/favicon-16x16.png",
-                            "src/favicon-32x32.png",
-                            "src/assets",
-                            {
-                                "glob": "_redirects",
-                                "input": "src",
-                                "output": "/"
-                            }
+                          "src/favicon-16x16.png",
+                          "src/favicon-32x32.png",
+                          "src/assets",
+                          {
+                            "glob": "_redirects",
+                            "input": "src",
+                            "output": "/"
+                          },
+                          "src/manifest.webmanifest",
+                          "src/manifest.webmanifest"
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
@@ -69,7 +71,9 @@
                                 "inject": false
                             }
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "serviceWorker": true,
+                        "ngswConfigPath": "ngsw-config.json"
                     },
                     "configurations": {
                         "production": {
@@ -131,9 +135,11 @@
                         "karmaConfig": "karma.conf.js",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                            "src/favicon-16x16.png",
-                            "src/favicon-32x32.png",
-                            "src/assets"
+                          "src/favicon-16x16.png",
+                          "src/favicon-32x32.png",
+                          "src/assets",
+                          "src/manifest.webmanifest",
+                          "src/manifest.webmanifest"
                         ],
                         "styles": [
                             "src/styles/styles.scss"

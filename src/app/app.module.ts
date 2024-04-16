@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
@@ -12,6 +12,7 @@ import { mockApiServices } from 'app/mock-api';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -39,7 +40,13 @@ const routerConfig: ExtraOptions = {
         LayoutModule,
 
         // 3rd party modules that require global configuration via forRoot
-        MarkdownModule.forRoot({})
+        MarkdownModule.forRoot({}),
+         ServiceWorkerModule.register('ngsw-worker.js', {
+           enabled: !isDevMode(),
+           // Register the ServiceWorker as soon as the application is stable
+           // or after 30 seconds (whichever comes first).
+           registrationStrategy: 'registerWhenStable:30000'
+         })
     ],
     bootstrap   : [
         AppComponent
