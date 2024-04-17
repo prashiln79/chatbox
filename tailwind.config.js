@@ -19,10 +19,7 @@ const customPalettes = {
 const themes = {
     // Default theme is required for theming system to work correctly
     'default': {
-        primary  : {
-            ...colors.indigo,
-            DEFAULT: colors.indigo[600]
-        },
+        primary  : customPalettes.brand,
         accent   : {
             ...colors.slate,
             DEFAULT: colors.slate[800]

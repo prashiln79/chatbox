@@ -1,8 +1,8 @@
 {
-  "name": "riskanalysis",
-  "short_name": "riskanalysis",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Chat2Random",
+  "short_name": "Chat2Random",
+  "theme_color": "#e2e8f0",
+  "background_color": "#000000",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
