@@ -23,7 +23,6 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "baseHref": "/theme/",
                         "outputPath": "dist/theme",
                         "index": "src/index.html",
                         "main": "src/main.ts",
@@ -161,7 +160,7 @@
                     "builder": "angular-cli-ghpages:deploy",
                     "options": {
                         "buildTarget": "chatBox:build:production",
-                        "baseHref": "/theme/",
+                        "baseHref": "https://prashiln79.github.io/chatbox/",
                         "repo": "https://github.com/prashiln79/theme.git",
                         "dir": "dist/theme"
                     }
