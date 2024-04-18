@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1713445426006,
+  "timestamp": 1713446996543,
   "index": "https://prashiln79.github.io/chatbox/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://prashiln79.github.io/chatbox/245.e0c006a285cbb46d.js",
         "https://prashiln79.github.io/chatbox/25.4ba6b51fbc9559a3.js",
-        "https://prashiln79.github.io/chatbox/251.5bd09898c4839863.js",
+        "https://prashiln79.github.io/chatbox/251.9fd9100d3565411a.js",
         "https://prashiln79.github.io/chatbox/522.4171253ebdd4844f.js",
         "https://prashiln79.github.io/chatbox/605.9bcf9de973c57a3f.js",
         "https://prashiln79.github.io/chatbox/70.65e0e671d114a9dc.js",
@@ -28,8 +28,8 @@
         "https://prashiln79.github.io/chatbox/md-dark-lara.css",
         "https://prashiln79.github.io/chatbox/md-light-lara.css",
         "https://prashiln79.github.io/chatbox/polyfills.0f4341ae2e5b7ab2.js",
-        "https://prashiln79.github.io/chatbox/runtime.10271ff8d63ff8d5.js",
-        "https://prashiln79.github.io/chatbox/styles.c76aecec50e32aab.css"
+        "https://prashiln79.github.io/chatbox/runtime.baeea716cbd2ca8c.js",
+        "https://prashiln79.github.io/chatbox/styles.f105211ffb2c76fe.css"
       ],
       "patterns": []
     },
@@ -577,7 +577,7 @@
   "hashTable": {
     "https://prashiln79.github.io/chatbox/245.e0c006a285cbb46d.js": "b5cc7991fa1215fe316eb01208d8de3262ad43e4",
     "https://prashiln79.github.io/chatbox/25.4ba6b51fbc9559a3.js": "fed7a994121c2e2f2a35aea458f84f1d60584315",
-    "https://prashiln79.github.io/chatbox/251.5bd09898c4839863.js": "88fc00ede53918693afa677942d8bef3d51a4955",
+    "https://prashiln79.github.io/chatbox/251.9fd9100d3565411a.js": "02554028a92355f5968496a8892c91da32e5edd4",
     "https://prashiln79.github.io/chatbox/522.4171253ebdd4844f.js": "7d8eeba45c20e3b9e13675bcd31763d8000c2175",
     "https://prashiln79.github.io/chatbox/605.9bcf9de973c57a3f.js": "465812c7bfe395c310f13e14f44ee836f8d01e46",
     "https://prashiln79.github.io/chatbox/70.65e0e671d114a9dc.js": "04678dee0d88b92db5601441192f012d547a9ed1",
@@ -1114,14 +1114,14 @@
     "https://prashiln79.github.io/chatbox/icomoon.7e34357e18f0c61a.svg": "c961de5a6fc0c008832a5f46d75a79d8b1bd9a7e",
     "https://prashiln79.github.io/chatbox/icomoon.a099a6aab94a61f7.woff": "02c3d25b8d0df958233f2aba3702b4cade34afd8",
     "https://prashiln79.github.io/chatbox/icomoon.a52e32b1cc20bb92.ttf": "112ceea65a2533b7371efd0544352ce4974fb1bb",
-    "https://prashiln79.github.io/chatbox/index.html": "60b49cc1733aeef6401e180562a7cc9568774610",
+    "https://prashiln79.github.io/chatbox/index.html": "33ef75a3244a7a24d81079fe1fe551b12809faac",
     "https://prashiln79.github.io/chatbox/main.251ed2908ba5a101.js": "c3488105f8cc7f966e8cc4c429969d2abc56255d",
     "https://prashiln79.github.io/chatbox/manifest.webmanifest": "e07047ff7f61acba367c1117571040a86598753b",
     "https://prashiln79.github.io/chatbox/md-dark-lara.css": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
     "https://prashiln79.github.io/chatbox/md-light-lara.css": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
     "https://prashiln79.github.io/chatbox/polyfills.0f4341ae2e5b7ab2.js": "a6f32781ebee0b3e9e0d5317ee5a8c6aa4b3b7bc",
-    "https://prashiln79.github.io/chatbox/runtime.10271ff8d63ff8d5.js": "5841aff211486e3b7a3deebcbd1ec2619f082aa8",
-    "https://prashiln79.github.io/chatbox/styles.c76aecec50e32aab.css": "034c99189e664c40107d3358df6837f572941b80"
+    "https://prashiln79.github.io/chatbox/runtime.baeea716cbd2ca8c.js": "7604cd013cfc9c01bf3d8508102d70e9d3c71bc1",
+    "https://prashiln79.github.io/chatbox/styles.f105211ffb2c76fe.css": "6e5b624ce9a929925b567e595175ad9bc0fd98a6"
   },
   "navigationUrls": [
     {
