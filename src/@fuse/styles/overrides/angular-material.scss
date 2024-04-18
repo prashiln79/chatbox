@@ -1021,7 +1021,7 @@
 .mdc-text-field {
 	@apply p-0 #{'!important'};
 }
-.mat-input-element {
+.mat-mdc-input-element {
 	&::placeholder {
 		transition: none !important;
 		@apply text-hint #{'!important'};
@@ -1044,8 +1044,8 @@
 }
 
 /* Invalid */
-.mat-form-field-invalid {
-	.mat-input-element {
+.mat-mdc-form-field-invalid {
+	.mat-mdc-input-element {
 		/* Placeholder color */
 		&::placeholder {
 			@apply text-warn #{'!important'};
@@ -1192,7 +1192,7 @@ div[matformfieldlineripple] {
 }
 
 /* Invalid */
-.mat-form-field-invalid {
+.mat-mdc-form-field-invalid {
 	.mat-select {
 		/* Placeholder color */
 		.mat-select-placeholder {
@@ -1371,4 +1371,8 @@ textarea.mat-input-element {
 			@apply text-on-warn text-opacity-12 #{'!important'};
 		}
 	}
+}
+
+.mdc-notched-outline__notch {
+	border-right: none;
 }

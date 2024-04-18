@@ -1,0 +1,104 @@
+.logo {
+	border-radius: 12px;
+	border-color: #00000091;
+	padding: 5px;
+}
+
+.option {
+	min-height: 5.5rem !important;
+	border-radius: 8px !important;
+
+	mat-icon {
+		transform: scale(1.2);
+		margin-right: 0 !important;
+	}
+}
+
+.bx--female {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	--svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='4' r='2' fill='%23000'/%3E%3Cpath fill='%23000' d='M14.948 7.684A.997.997 0 0 0 14 7h-4a.998.998 0 0 0-.948.684l-2 6l1.775.593L8 18h2v4h4v-4h2l-.827-3.724l1.775-.593z'/%3E%3C/svg%3E");
+	background-color: currentColor;
+	-webkit-mask-image: var(--svg);
+	mask-image: var(--svg);
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: 100% 100%;
+	mask-size: 100% 100%;
+}
+
+.bx--male {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	--svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='4' r='2' fill='%23000'/%3E%3Cpath fill='%23000' d='M15 7H9a1 1 0 0 0-1 1v7h2v7h4v-7h2V8a1 1 0 0 0-1-1'/%3E%3C/svg%3E");
+	background-color: currentColor;
+	-webkit-mask-image: var(--svg);
+	mask-image: var(--svg);
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: 100% 100%;
+	mask-size: 100% 100%;
+}
+
+.mdi--human-genderless {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	--svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 2a2 2 0 1 1 0 4c-1.11 0-2-.89-2-2s.9-2 2-2m1.91 6.41A1.99 1.99 0 0 0 12 7h-1.5c-1.1 0-2 .9-2 2v5.5H10V22h3.5v-6h3z'/%3E%3C/svg%3E");
+	background-color: currentColor;
+	-webkit-mask-image: var(--svg);
+	mask-image: var(--svg);
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: 100% 100%;
+	mask-size: 100% 100%;
+}
+
+.color-body {
+	animation-duration: 15s !important;
+	animation-name: color-change !important;
+	animation-iteration-count: infinite !important;
+	animation-direction: normal !important;
+	animation-timing-function: ease-in !important;
+}
+
+.dashboard-night {
+	animation-name: none;
+	background-color: black;
+}
+
+@keyframes color-change {
+	0% {
+		background-color: #ffffff;
+	}
+
+	// 5% {
+	//     background-color: #ff0000;
+	// }
+
+	16% {
+		background-color: #e3ecf6;
+	}
+
+	// 33% {
+	// 	background-color: #f0e9b9;
+	// }
+
+	50% {
+		background-color: #edf8a7;
+	}
+
+	66% {
+		background-color: #adddf0;
+	}
+
+	83% {
+		background-color: #f0fffd;
+	}
+
+	100% {
+		background-color: #ffffff;
+	}
+}
