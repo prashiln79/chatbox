@@ -11,7 +11,7 @@
       "background_color": "#fff"
     }
   },
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "./",
   "start_url": "./",
   "icons": [
