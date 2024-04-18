@@ -1,8 +1,8 @@
 {
   "name": "Chat2Random",
-  "short_name": "Find",
+  "short_name": "Chat2R",
   "theme_color": "#000000",
-  "background_color": "#ffffff",
+  "background_color": "#000000",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
