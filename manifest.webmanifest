@@ -1,17 +1,9 @@
 {
   "name": "Chat2Random",
-  "short_name": "Chat2Random",
-  "color_schemes": {
-    "dark": {
-      "theme_color": "#fff",
-      "background_color": "#000"
-    },
-    "light": {
-      "theme_color": "#000",
-      "background_color": "#fff"
-    }
-  },
-  "display": "fullscreen",
+  "short_name": "Find",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "display": "standalone",
   "scope": "./",
   "start_url": "./",
   "icons": [
