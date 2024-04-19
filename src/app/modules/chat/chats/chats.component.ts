@@ -3,6 +3,7 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { ChatService } from "../chat.service";
 import { Chat, Profile } from "../chat.types";
+import { Router } from "@angular/router";
 
 @Component({
 	selector: "chat-chats",
@@ -22,7 +23,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
 	/**
 	 * Constructor
 	 */
-	constructor(private _chatService: ChatService, private _changeDetectorRef: ChangeDetectorRef) {}
+	constructor(private _chatService: ChatService, private _changeDetectorRef: ChangeDetectorRef, private _router: Router) {}
 
 	// -----------------------------------------------------------------------------------------------------
 	// @ Lifecycle hooks
@@ -115,5 +116,13 @@ export class ChatsComponent implements OnInit, OnDestroy {
 	 */
 	trackByFn(index: number, item: any): any {
 		return item.id || index;
+	}
+
+	/**
+	 * Sign out
+	 */
+	signOut(): void {
+		//	this._authService.signOut();
+		this._router.navigate(["/sign-out"]);
 	}
 }
