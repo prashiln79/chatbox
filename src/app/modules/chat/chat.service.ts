@@ -3,13 +3,18 @@ import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { filter, map, switchMap, take, tap } from "rxjs/operators";
 import { Chat, Contact, Profile } from "./chat.types";
+import { Database, getDatabase, ref, set, onValue, update } from "firebase/database";
+import { FirebaseApp, initializeApp } from "firebase/app";
+import { environment } from "environments/environment";
+import moment from "moment";
 
-@Injectable({
-	providedIn: "root",
-})
+@Injectable()
 export class ChatService {
+	private app: FirebaseApp;
+	private db: Database;
+	private _chatsRef;
 	private _chat: BehaviorSubject<Chat> = new BehaviorSubject(null);
-	private _chats: BehaviorSubject<Chat[]> = new BehaviorSubject(null);
+	private _chats: BehaviorSubject<Chat[]> = new BehaviorSubject([]);
 	private _contact: BehaviorSubject<Contact> = new BehaviorSubject(null);
 	private _contacts: BehaviorSubject<Contact[]> = new BehaviorSubject(null);
 	private _profile: BehaviorSubject<Profile> = new BehaviorSubject(null);
@@ -17,7 +22,11 @@ export class ChatService {
 	/**
 	 * Constructor
 	 */
-	constructor(private _httpClient: HttpClient) {}
+	constructor(private _httpClient: HttpClient) {
+		this.app = initializeApp(environment.firebase);
+		this.db = getDatabase(this.app);
+		this._chatsRef = ref(this.db, "chats");
+	}
 
 	// -----------------------------------------------------------------------------------------------------
 	// @ Accessors
@@ -66,11 +75,12 @@ export class ChatService {
 	 * Get chats
 	 */
 	getChats(): Observable<any> {
-		return this._httpClient.get<Chat[]>("api/apps/chat/chats").pipe(
-			tap((response: Chat[]) => {
-				this._chats.next(response);
-			})
-		);
+		onValue(this._chatsRef, (snapshot: any) => {
+			const data = snapshot.val();
+			this._chats.next(data);
+		});
+
+		return this._chats;
 	}
 
 	/**
@@ -113,23 +123,25 @@ export class ChatService {
 	 *
 	 * @param id
 	 */
-	getChatById(id: string): Observable<any> {
-		return this._httpClient.get<Chat>("api/apps/chat/chat", { params: { id } }).pipe(
-			map((chat) => {
-				// Update the chat
-				this._chat.next(chat);
+	getChatById(id: string): any {
+		this._chat.next(this._chats.value[id]);
 
-				// Return the chat
-				return chat;
-			}),
-			switchMap((chat) => {
-				if (!chat) {
-					return throwError("Could not found chat with id of " + id + "!");
-				}
+		// return this._httpClient.get<Chat>("api/apps/chat/chat", { params: { id } }).pipe(
+		// 	map((chat) => {
+		// 		// Update the chat
+		// 		this._chat.next(chat);
 
-				return of(chat);
-			})
-		);
+		// 		// Return the chat
+		// 		return chat;
+		// 	}),
+		// 	switchMap((chat) => {
+		// 		if (!chat) {
+		// 			return throwError("Could not found chat with id of " + id + "!");
+		// 		}
+
+		// 		return of(chat);
+		// 	})
+		// );
 	}
 
 	/**
@@ -138,45 +150,43 @@ export class ChatService {
 	 * @param id
 	 * @param chat
 	 */
-	updateChat(id: string, chat: Chat): Observable<Chat> {
-		return this.chats$.pipe(
-			take(1),
-			switchMap((chats) =>
-				this._httpClient
-					.patch<Chat>("api/apps/chat/chat", {
-						id,
-						chat,
-					})
-					.pipe(
-						map((updatedChat) => {
-							// Find the index of the updated chat
-							const index = chats.findIndex((item) => item.id === id);
+	updateChat(id: string, chat: Chat): Promise<any> {
+		return set(ref(this.db, "chats/" + id), chat);
 
-							// Update the chat
-							chats[index] = updatedChat;
-
-							// Update the chats
-							this._chats.next(chats);
-
-							// Return the updated contact
-							return updatedChat;
-						}),
-						switchMap((updatedChat) =>
-							this.chat$.pipe(
-								take(1),
-								filter((item) => item && item.id === id),
-								tap(() => {
-									// Update the chat if it's selected
-									this._chat.next(updatedChat);
-
-									// Return the updated chat
-									return updatedChat;
-								})
-							)
-						)
-					)
-			)
-		);
+		// return this.chats$.pipe(
+		// 	take(1),
+		// 	switchMap((chats) =>
+		// 		this._httpClient
+		// 			.patch<Chat>("api/apps/chat/chat", {
+		// 				id,
+		// 				chat,
+		// 			})
+		// 			.pipe(
+		// 				map((updatedChat) => {
+		// 					// Find the index of the updated chat
+		// 					const index = chats.findIndex((item) => item.id === id);
+		// 					// Update the chat
+		// 					chats[index] = updatedChat;
+		// 					// Update the chats
+		// 					this._chats.next(chats);
+		// 					// Return the updated contact
+		// 					return updatedChat;
+		// 				}),
+		// 				switchMap((updatedChat) =>
+		// 					this.chat$.pipe(
+		// 						take(1),
+		// 						filter((item) => item && item.id === id),
+		// 						tap(() => {
+		// 							// Update the chat if it's selected
+		// 							this._chat.next(updatedChat);
+		// 							// Return the updated chat
+		// 							return updatedChat;
+		// 						})
+		// 					)
+		// 				)
+		// 			)
+		// 	)
+		// );
 	}
 
 	/**

@@ -15,6 +15,8 @@ import { ContactInfoComponent } from "./contact-info/contact-info.component";
 import { ConversationComponent } from "./conversation/conversation.component";
 import { NewChatComponent } from "./new-chat/new-chat.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { ChatService } from "./chat.service";
+import { ChatChatsResolver, ChatContactsResolver, ChatProfileResolver } from "./chat.resolvers";
 
 @NgModule({
 	declarations: [ChatComponent, ChatsComponent, ContactInfoComponent, ConversationComponent, NewChatComponent, ProfileComponent],
@@ -29,5 +31,6 @@ import { ProfileComponent } from "./profile/profile.component";
 		MatSidenavModule,
 		SharedModule,
 	],
+	providers: [ChatService, ChatChatsResolver, ChatProfileResolver, ChatContactsResolver],
 })
 export class ChatModule {}

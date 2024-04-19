@@ -23,10 +23,10 @@
 						<div class="flex items-center justify-between">
 							<div class="flex items-center mr-1 cursor-pointer" (click)="openProfile()">
 								<div class="w-10 h-10">
-									<ng-container *ngIf="profile.avatar">
-										<img class="object-cover w-full h-full rounded-full object-cover" [src]="profile.avatar" alt="Profile avatar" />
+									<ng-container *ngIf="profile?.avatar">
+										<img class="object-cover w-full h-full rounded-full object-cover" [src]="profile?.avatar" alt="Profile avatar" />
 									</ng-container>
-									<ng-container *ngIf="!profile.avatar">
+									<ng-container *ngIf="!profile?.avatar">
 										<div
 											class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
 										>
@@ -34,7 +34,7 @@
 										</div>
 									</ng-container>
 								</div>
-								<div class="ml-4 font-medium truncate">{{profile.name}}</div>
+								<div class="ml-4 font-medium truncate">{{profile.name | titlecase}}</div>
 							</div>
 							<!-- <button
                                 class="ml-auto"
@@ -102,6 +102,7 @@
 						<ng-container *ngIf="filteredChats.length > 0; else noChats">
 							<ng-container *ngFor="let chat of filteredChats; trackBy: trackByFn">
 								<div
+									(click)="onUserClick(chat)"
 									class="z-20 flex items-center py-5 px-8 cursor-pointer border-b"
 									[ngClass]="{'hover:bg-gray-100 dark:hover:bg-hover': !selectedChat || selectedChat.id !== chat.id,
                                                 'bg-primary-50 dark:bg-hover': selectedChat && selectedChat.id === chat.id}"
@@ -114,19 +115,19 @@
 												[class.ring-primary-50]="selectedChat && selectedChat.id === chat.id"
 											></div>
 										</ng-container>
-										<ng-container *ngIf="chat.contact.avatar">
-											<img class="w-full h-full rounded-full object-cover" [src]="chat.contact.avatar" alt="Contact avatar" />
+										<ng-container *ngIf="chat?.contact?.avatar">
+											<img class="w-full h-full rounded-full object-cover" [src]="chat?.contact?.avatar" alt="Contact avatar" />
 										</ng-container>
-										<ng-container *ngIf="!chat.contact.avatar">
+										<ng-container *ngIf="!chat?.contact?.avatar">
 											<div
 												class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
 											>
-												{{chat.contact.name.charAt(0)}}
+												{{chat?.name.charAt(0)}}
 											</div>
 										</ng-container>
 									</div>
 									<div class="min-w-0 ml-4">
-										<div class="font-medium leading-5 truncate">{{chat.contact.name}}</div>
+										<div class="font-medium leading-5 truncate">{{chat?.name}}</div>
 										<div
 											class="leading-5 truncate text-secondary"
 											[class.text-primary]="chat.unreadCount > 0"

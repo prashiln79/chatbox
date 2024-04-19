@@ -15,6 +15,7 @@ import { takeUntil } from "rxjs/operators";
 import { FuseMediaWatcherService } from "@fuse/services/media-watcher";
 import { ChatService } from "../chat.service";
 import { Chat } from "../chat.types";
+import { v4 as uuidv4 } from "uuid";
 
 @Component({
 	selector: "chat-conversation",
@@ -144,7 +145,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
 		this.chat.muted = !this.chat.muted;
 
 		// Update the chat on the server
-		this._chatService.updateChat(this.chat.id, this.chat).subscribe();
+		this._chatService.updateChat(this.chat.id, this.chat).then();
 	}
 
 	/**
@@ -155,5 +156,24 @@ export class ConversationComponent implements OnInit, OnDestroy {
 	 */
 	trackByFn(index: number, item: any): any {
 		return item.id || index;
+	}
+
+	sendMsg(msg) {
+		const chat = {
+			id: uuidv4(),
+			chatId: this.chat.id,
+			contactId: this.chat.id,
+			isMine: true,
+			value: msg,
+			createdAt: new Date().toString(),
+		};
+		if (this.chat.messages) {
+			this.chat.messages.push(chat);
+		} else {
+			this.chat.messages = [chat];
+		}
+		this._chatService.updateChat(this.chat.id, this.chat).then(()=>{
+
+		});
 	}
 }

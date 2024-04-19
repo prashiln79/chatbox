@@ -5,9 +5,7 @@ import { catchError } from "rxjs/operators";
 import { ChatService } from "./chat.service";
 import { Chat, Contact, Profile } from "./chat.types";
 
-@Injectable({
-	providedIn: "root",
-})
+@Injectable()
 export class ChatChatsResolver implements Resolve<any> {
 	/**
 	 * Constructor
@@ -29,9 +27,7 @@ export class ChatChatsResolver implements Resolve<any> {
 	}
 }
 
-@Injectable({
-	providedIn: "root",
-})
+@Injectable()
 export class ChatChatResolver implements Resolve<any> {
 	/**
 	 * Constructor
@@ -68,9 +64,7 @@ export class ChatChatResolver implements Resolve<any> {
 	}
 }
 
-@Injectable({
-	providedIn: "root",
-})
+@Injectable()
 export class ChatContactsResolver implements Resolve<any> {
 	/**
 	 * Constructor
@@ -92,9 +86,7 @@ export class ChatContactsResolver implements Resolve<any> {
 	}
 }
 
-@Injectable({
-	providedIn: "root",
-})
+@Injectable()
 export class ChatProfileResolver implements Resolve<any> {
 	/**
 	 * Constructor

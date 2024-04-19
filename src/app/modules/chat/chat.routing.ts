@@ -21,9 +21,9 @@ export const chatRoutes: Route[] = [
 					{
 						path: ":id",
 						component: ConversationComponent,
-						resolve: {
-							conversation: ChatChatResolver,
-						},
+						// resolve: {
+						// 	conversation: ChatChatResolver,
+						// },
 					},
 				],
 			},
