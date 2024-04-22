@@ -22,7 +22,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
 	drawerOpened: boolean = false;
 	filteredChats: Chat[];
 	profile: Profile;
-	selectedChat: conversation;
+	selectedChat: Chat;
 	private _unsubscribeAll: Subject<any> = new Subject<any>();
 
 	/**
@@ -71,12 +71,12 @@ export class ChatsComponent implements OnInit, OnDestroy {
 		// });
 
 		// Selected chat
-		// this._chatService.chat$.pipe(takeUntil(this._unsubscribeAll)).subscribe((chat: conversation) => {
-		// 	this.selectedChat = chat;
+		this._chatService.chat$.pipe(takeUntil(this._unsubscribeAll)).subscribe((chat: Chat) => {
+			this.selectedChat = chat;
 
-		// 	// Mark for check
-		// 	this._changeDetectorRef.markForCheck();
-		// });
+			// Mark for check
+			this._changeDetectorRef.markForCheck();
+		});
 	}
 
 	/**
@@ -150,5 +150,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
 
 	onUserClick(chat): void {
 		this._chatService.getChatById(this.profile.id, chat.id);
+		// Mark for check
+		this._changeDetectorRef.markForCheck();
 	}
 }

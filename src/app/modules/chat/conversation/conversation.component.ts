@@ -161,18 +161,20 @@ export class ConversationComponent implements OnInit, OnDestroy {
 	}
 
 	sendMsg(msg) {
-		this.chat.unreadCount++;
-		this.chat.lastMessageAt = moment().format("DD/MM/YYYY");
-		this.chat.lastMessage = msg;
-		this.chat.messages.push({
-			id: uuidv4(),
-			senderId: this.profile.id,
-			receiverId: this.chat.id,
-			isMine: true,
-			value: msg,
-			createdAt: new Date().toString(),
-		});
-		this._chatService.updateChat(this.chat.id, this.chat).then(() => {});
-		this.messageInput.nativeElement.value = "";
+		if (msg) {
+			this.chat.unreadCount++;
+			this.chat.lastMessageAt = moment().format("DD/MM/YYYY");
+			this.chat.lastMessage = msg;
+			this.chat.messages.push({
+				id: uuidv4(),
+				senderId: this.profile.id,
+				receiverId: this.chat.id,
+				isMine: true,
+				value: msg,
+				createdAt: new Date().toString(),
+			});
+			this._chatService.updateChat(this.chat.id, this.chat).then(() => {});
+			this.messageInput.nativeElement.value = "";
+		}
 	}
 }

@@ -74,7 +74,7 @@
 				</div>
 
 				<!-- Conversation -->
-				<div class="flex overflow-y-auto flex-col-reverse">
+				<div class="flex overflow-y-auto flex-col-reverse h-full">
 					<div class="flex flex-col flex-auto flex-shrink p-6 bg-card dark:bg-transparent">
 						<ng-container *ngFor="let message of chat.messages; let i = index; let first = first; let last = last; trackBy: trackByFn">
 							<!-- Start of the day -->
@@ -135,7 +135,7 @@
 
 				<!-- Message field -->
 				<div class="flex items-end p-4 border-t bg-gray-50 dark:bg-transparent">
-					<div class="flex items-center h-11 my-px">
+					<div class="flex items-center h-11 my-px justify-center h-full">
 						<button mat-icon-button>
 							<mat-icon [svgIcon]="'heroicons_outline:emoji-happy'"></mat-icon>
 						</button>
@@ -143,7 +143,7 @@
 							<mat-icon [svgIcon]="'heroicons_outline:paper-clip'"></mat-icon>
 						</button>
 					</div>
-					<mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded fuse-mat-bold w-full ml-4">
+					<mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded fuse-mat-bold w-full ml-4 mt-5">
 						<textarea
 							class="min-h-5 my-0 resize-none"
 							style="margin: 11px 0 !important; padding: 0 !important;"
@@ -152,7 +152,7 @@
 							#messageInput
 						></textarea>
 					</mat-form-field>
-					<div class="flex items-center h-11 my-px ml-4">
+					<div class="flex items-center h-11 my-px ml-4 h-full">
 						<button mat-icon-button (click)="sendMsg(messageInput.value)">
 							<mat-icon class="transform rotate-90" [svgIcon]="'heroicons_outline:paper-airplane'"></mat-icon>
 						</button>
@@ -165,14 +165,14 @@
 	<!-- Select chat or start new template -->
 	<ng-template #selectChatOrStartNew>
 		<div class="flex flex-col flex-auto items-center justify-center bg-gray-100 dark:bg-transparent">
-			<mat-icon class="icon-size-24" [svgIcon]="'iconsmind:speach_bubble'"></mat-icon>
+			<mat-icon class="icon-size-24" [svgIcon]="'heroicons_outline:microphone'"></mat-icon>
 			<div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">Select a conversation or start a new chat</div>
 		</div>
 	</ng-template>
 
 	<!-- Speech bubble tail SVG -->
 	<!-- @formatter:off -->
-	<ng-template #speechBubbleExtension>
+	<!-- <ng-template #speechBubbleExtension>
 		<svg width="100%" height="100%" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
 			<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 				<path
@@ -182,6 +182,6 @@
 				></path>
 			</g>
 		</svg>
-	</ng-template>
+	</ng-template> -->
 	<!-- @formatter:on -->
 </div>
