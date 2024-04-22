@@ -36,6 +36,7 @@ export interface Contact {
 export interface Chat {
 	id?: string;
 	name: string;
+	online: boolean;
 	contactId?: string;
 	contact?: Contact;
 	unreadCount?: number;
@@ -44,10 +45,19 @@ export interface Chat {
 	lastMessageAt?: string;
 	messages?: {
 		id?: string;
-		chatId?: string;
-		contactId?: string;
+		senderId: string;
+		receiverId: string;
 		isMine?: boolean;
 		value?: string;
 		createdAt?: string;
 	}[];
+}
+
+export interface conversation {
+	id?: string;
+	senderId: string;
+	receiverId: string;
+	isMine?: boolean;
+	value?: string;
+	createdAt?: string;
 }

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { ChatService } from "../chat.service";
-import { Chat, Profile } from "../chat.types";
+import { Chat, Profile, conversation } from "../chat.types";
 import { Router } from "@angular/router";
 import { FormGroup } from "@angular/forms";
 import moment from "moment";
@@ -22,7 +22,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
 	drawerOpened: boolean = false;
 	filteredChats: Chat[];
 	profile: Profile;
-	selectedChat: Chat;
+	selectedChat: conversation;
 	private _unsubscribeAll: Subject<any> = new Subject<any>();
 
 	/**
@@ -31,8 +31,8 @@ export class ChatsComponent implements OnInit, OnDestroy {
 	constructor(private _chatService: ChatService, private _changeDetectorRef: ChangeDetectorRef, private _router: Router) {
 		// this.app = initializeApp(environment.firebase);
 		// this.db = getDatabase(this.app);
-		if (sessionStorage.getItem("user")) {
-			this.profile = JSON.parse(sessionStorage.getItem("user"));
+		if (localStorage.getItem("user")) {
+			this.profile = JSON.parse(localStorage.getItem("user"));
 		} else {
 			this._router.navigate(["/sign-out"]);
 		}
@@ -49,9 +49,9 @@ export class ChatsComponent implements OnInit, OnDestroy {
 		// Chats
 
 		this._chatService.chats$.pipe(takeUntil(this._unsubscribeAll)).subscribe((chats: Chat[]) => {
-			for (let id in chats) {
+			let chatsList = structuredClone(chats);
+			for (let id in chatsList) {
 				if (!this.chats.map((chat) => chat.id).includes(id)) {
-					chats[id]["lastMessageAt"] = moment(chats[id]["lastMessageAt"]).format("DD/MM/YYYY");
 					this.chats.push(chats[id]);
 				}
 			}
@@ -61,7 +61,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
 		});
 
 		// Profile
-		this.profile = JSON.parse(sessionStorage.getItem("user"));
+		this.profile = JSON.parse(localStorage.getItem("user"));
 		this._changeDetectorRef.markForCheck();
 		// this._chatService.profile$.pipe(takeUntil(this._unsubscribeAll)).subscribe((profile: Profile) => {
 		// 	this.profile = profile;
@@ -71,12 +71,12 @@ export class ChatsComponent implements OnInit, OnDestroy {
 		// });
 
 		// Selected chat
-		this._chatService.chat$.pipe(takeUntil(this._unsubscribeAll)).subscribe((chat: Chat) => {
-			this.selectedChat = chat;
+		// this._chatService.chat$.pipe(takeUntil(this._unsubscribeAll)).subscribe((chat: conversation) => {
+		// 	this.selectedChat = chat;
 
-			// Mark for check
-			this._changeDetectorRef.markForCheck();
-		});
+		// 	// Mark for check
+		// 	this._changeDetectorRef.markForCheck();
+		// });
 	}
 
 	/**
@@ -144,11 +144,11 @@ export class ChatsComponent implements OnInit, OnDestroy {
 	 */
 	signOut(): void {
 		//	this._authService.signOut();
-		sessionStorage.clear();
+		localStorage.clear();
 		this._router.navigate(["/sign-out"]);
 	}
 
 	onUserClick(chat): void {
-		this._chatService.getChatById(chat.id);
+		this._chatService.getChatById(this.profile.id, chat.id);
 	}
 }

@@ -1,6 +1,6 @@
 import { Route } from "@angular/router";
 import { ChatComponent } from "./chat.component";
-import { ChatChatsResolver, ChatContactsResolver, ChatProfileResolver, ChatChatResolver } from "./chat.resolvers";
+import { ChatChatsResolver, ChatContactsResolver, ChatProfileResolver } from "./chat.resolvers";
 import { ChatsComponent } from "./chats/chats.component";
 import { ConversationComponent } from "./conversation/conversation.component";
 

@@ -9,6 +9,7 @@ import { environment } from "environments/environment";
 
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { Database, getDatabase, ref, set, onValue } from "firebase/database";
+import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 
 @Component({
@@ -41,7 +42,7 @@ export class AuthSignInComponent implements OnInit {
 		private _formBuilder: FormBuilder,
 		private _router: Router
 	) {
-		let user = sessionStorage.getItem("user");
+		let user = localStorage.getItem("user");
 		if (user) {
 			this._router.navigateByUrl("/chats");
 		}
@@ -66,30 +67,42 @@ export class AuthSignInComponent implements OnInit {
 	 * Sign in
 	 */
 	signIn(): void {
-		this._router.navigateByUrl("/chats");
-
 		// Return if the form is invalid
 		// if (this.signInForm.invalid) {
 		// 	return;
 		// }
 
-		// Disable the form
-		this.signInForm.disable();
+		if (this.signInForm.get("userName").value) {
+			// Disable the form
+			this.signInForm.disable();
 
-		// Hide the alert
-		this.showAlert = false;
+			// Hide the alert
+			this.showAlert = false;
 
-		const chat: Chat = {
-			id: uuidv4(),
-			name: this.signInForm.get("userName").value,
-			unreadCount: 0,
-			muted: false,
-			lastMessage: "",
-			lastMessageAt: new Date().toString(),
-			messages: [],
-		};
-		set(ref(this.db, `chats/${chat.id}`), chat);
-		sessionStorage.setItem("user", JSON.stringify({ id: chat.id, name: this.signInForm.get("userName").value }));
+			const chat: Chat = {
+				online: true,
+				id: uuidv4(),
+				name: this.signInForm.get("userName").value,
+				unreadCount: 0,
+				muted: false,
+				lastMessage: "",
+				lastMessageAt: moment().format("DD/MM/YYYY"),
+				messages: [],
+			};
+			set(ref(this.db, `chats/${chat.id}`), chat);
+			localStorage.setItem("user", JSON.stringify({ id: chat.id, name: this.signInForm.get("userName").value }));
+			this._router.navigateByUrl("/chats");
+		} else {
+			this.signInForm.enable();
+			// Reset the form
+			// Set the alert
+			this.alert = {
+				type: "error",
+				message: "Name Is Require",
+			};
+			// Show the alert
+			this.showAlert = true;
+		}
 
 		// // Sign in
 		// this._authService.signIn(this.signInForm.value)

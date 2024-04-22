@@ -2,17 +2,19 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { filter, map, switchMap, take, tap } from "rxjs/operators";
-import { Chat, Contact, Profile } from "./chat.types";
+import { Chat, Contact, Profile, conversation } from "./chat.types";
 import { Database, getDatabase, ref, set, onValue, update } from "firebase/database";
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { environment } from "environments/environment";
 import moment from "moment";
+import { messages } from "app/mock-api/apps/chat/data";
 
 @Injectable()
 export class ChatService {
 	private app: FirebaseApp;
 	private db: Database;
 	private _chatsRef;
+	private _onlineUsers: BehaviorSubject<Chat[]> = new BehaviorSubject([]);
 	private _chat: BehaviorSubject<Chat> = new BehaviorSubject(null);
 	private _chats: BehaviorSubject<Chat[]> = new BehaviorSubject([]);
 	private _contact: BehaviorSubject<Contact> = new BehaviorSubject(null);
@@ -76,8 +78,7 @@ export class ChatService {
 	 */
 	getChats(): Observable<any> {
 		onValue(this._chatsRef, (snapshot: any) => {
-			const data = snapshot.val();
-			this._chats.next(data);
+			this._chats.next(snapshot.val());
 		});
 
 		return this._chats;
@@ -123,25 +124,15 @@ export class ChatService {
 	 *
 	 * @param id
 	 */
-	getChatById(id: string): any {
-		this._chat.next(this._chats.value[id]);
+	getChatById(senderId: string, receiverId: string): any {
+		this._chat.next(this._chats.value[receiverId]);
+		onValue(ref(this.db, "chats/" + senderId), (snapshot: any) => {
+			this.combineSenderAndReceiverChats(senderId, snapshot.val()?.messages || []);
+		});
 
-		// return this._httpClient.get<Chat>("api/apps/chat/chat", { params: { id } }).pipe(
-		// 	map((chat) => {
-		// 		// Update the chat
-		// 		this._chat.next(chat);
-
-		// 		// Return the chat
-		// 		return chat;
-		// 	}),
-		// 	switchMap((chat) => {
-		// 		if (!chat) {
-		// 			return throwError("Could not found chat with id of " + id + "!");
-		// 		}
-
-		// 		return of(chat);
-		// 	})
-		// );
+		onValue(ref(this.db, "chats/" + receiverId + "/messages"), (snapshot: any) => {
+			this.combineSenderAndReceiverChats(senderId, snapshot.val());
+		});
 	}
 
 	/**
@@ -194,5 +185,23 @@ export class ChatService {
 	 */
 	resetChat(): void {
 		this._chat.next(null);
+	}
+
+	combineSenderAndReceiverChats(senderId, chats: Array<conversation>) {
+		let messagesList = structuredClone(chats);
+		let chat = this._chat.value;
+		let currentMessagesList = structuredClone(chat?.messages || []);
+
+		for (let id in messagesList) {
+			if (
+				!currentMessagesList?.map((message) => message.id).includes(messagesList[id].id) &&
+				(messagesList[id].senderId == senderId || messagesList[id].receiverId == senderId)
+			) {
+				messagesList[id].isMine = senderId == chats[id].senderId;
+				currentMessagesList.push(messagesList[id]);
+			}
+		}
+		chat.messages = currentMessagesList;
+		this._chat.next(chat);
 	}
 }

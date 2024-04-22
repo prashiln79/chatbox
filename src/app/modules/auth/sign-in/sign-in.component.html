@@ -20,8 +20,8 @@
 			<!-- <div class="mt-8  text-4xl font-extrabold tracking-tight leading-tight hidden md:flex">Log in</div> -->
 
 			<!-- Alert -->
-			<!-- <fuse-alert
-				class="mt-8 -mb-4"
+			<fuse-alert
+				class="mt-8 mb-2"
 				*ngIf="showAlert"
 				[appearance]="'outline'"
 				[showIcon]="false"
@@ -29,7 +29,7 @@
 				[@shake]="alert.type === 'error'"
 			>
 				{{alert.message}}
-			</fuse-alert> -->
+			</fuse-alert>
 
 			<!-- Sign in form -->
 			<form class="mt-0 md:mt-2 flex flex-col items-center lg:relative lg:top-[-25px]" [formGroup]="signInForm">
@@ -40,23 +40,6 @@
 
 					<input id="email" matInput placeholder="Your Name" [formControlName]="'userName'" autofocus />
 				</mat-form-field>
-
-				<!-- <div class="flex items-center space-x-4 mb-2 w-full">
-					<button
-						class="flex-auto option bg-transparent md:bg-inherit shadow-lg dark:bottom-2 dark:bg-slate-700"
-						type="button"
-						mat-flat-button
-						title="Male"
-					>
-						<mat-icon class="icon-size-10 sm:pb-1"><span class="bx--male"></span></mat-icon>
-					</button>
-					<button class="flex-auto option bg-transparent md:bg-inherit shadow-lg dark:bg-slate-700" type="button" mat-flat-button title="Male">
-						<mat-icon class="icon-size-10 sm:pb-1"><span class="mdi--human-genderless"></span></mat-icon>
-					</button>
-					<button class="flex-auto option bg-transparent md:bg-inherit shadow-lg dark:bg-slate-700" type="button" mat-flat-button title="Male">
-						<mat-icon class="icon-size-10 sm:pb-1"><span class="bx--female"></span></mat-icon>
-					</button>
-				</div> -->
 
 				<!-- Submit button -->
 				<button

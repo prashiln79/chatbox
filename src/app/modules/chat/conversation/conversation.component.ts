@@ -14,8 +14,9 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { FuseMediaWatcherService } from "@fuse/services/media-watcher";
 import { ChatService } from "../chat.service";
-import { Chat } from "../chat.types";
+import { Chat, Profile } from "../chat.types";
 import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
 
 @Component({
 	selector: "chat-conversation",
@@ -24,6 +25,7 @@ import { v4 as uuidv4 } from "uuid";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConversationComponent implements OnInit, OnDestroy {
+	profile: Profile;
 	@ViewChild("messageInput") messageInput: ElementRef;
 	chat: Chat;
 	drawerMode: "over" | "side" = "side";
@@ -81,7 +83,6 @@ export class ConversationComponent implements OnInit, OnDestroy {
 		// Chat
 		this._chatService.chat$.pipe(takeUntil(this._unsubscribeAll)).subscribe((chat: Chat) => {
 			this.chat = chat;
-
 			// Mark for check
 			this._changeDetectorRef.markForCheck();
 		});
@@ -98,6 +99,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
 			// Mark for check
 			this._changeDetectorRef.markForCheck();
 		});
+		this.profile = JSON.parse(localStorage.getItem("user"));
 	}
 
 	/**
@@ -159,21 +161,18 @@ export class ConversationComponent implements OnInit, OnDestroy {
 	}
 
 	sendMsg(msg) {
-		const chat = {
+		this.chat.unreadCount++;
+		this.chat.lastMessageAt = moment().format("DD/MM/YYYY");
+		this.chat.lastMessage = msg;
+		this.chat.messages.push({
 			id: uuidv4(),
-			chatId: this.chat.id,
-			contactId: this.chat.id,
+			senderId: this.profile.id,
+			receiverId: this.chat.id,
 			isMine: true,
 			value: msg,
 			createdAt: new Date().toString(),
-		};
-		if (this.chat.messages) {
-			this.chat.messages.push(chat);
-		} else {
-			this.chat.messages = [chat];
-		}
-		this._chatService.updateChat(this.chat.id, this.chat).then(()=>{
-
 		});
+		this._chatService.updateChat(this.chat.id, this.chat).then(() => {});
+		this.messageInput.nativeElement.value = "";
 	}
 }
