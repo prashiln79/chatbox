@@ -3,6 +3,8 @@
 ## Description
 This Random Chat App is a simple yet engaging platform where users can connect with random people from around the world and have conversations on various topics.
 
+Demo - https://prashiln79.github.io/chatbox/ 
+
 ## Features
 - Random pairing with other users
 - Real-time messaging
