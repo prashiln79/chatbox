@@ -37,7 +37,7 @@
 								</div>
 							</ng-container>
 						</div>
-						<div class="ml-4 text-lg font-medium leading-5 truncate">{{chat?.name}}</div>
+						<div class="ml-4 text-lg font-medium leading-5 truncate">{{chat?.name | titlecase}}</div>
 					</div>
 
 					<button class="ml-auto" mat-icon-button [matMenuTriggerFor]="conversationHeaderMenu">
@@ -65,7 +65,7 @@
 								<mat-icon [svgIcon]="'heroicons_outline:backspace'"></mat-icon>
 								Clear messages
 							</button>
-							<button mat-menu-item>
+							<button mat-menu-item (click)="deleteChat()">
 								<mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
 								Delete chat
 							</button>
@@ -76,9 +76,9 @@
 				<!-- Conversation -->
 				<div class="flex overflow-y-auto flex-col-reverse h-full">
 					<div class="flex flex-col flex-auto flex-shrink p-6 bg-card dark:bg-transparent">
-						<ng-container *ngFor="let message of chat.messages; let i = index; let first = first; let last = last; trackBy: trackByFn">
+						<ng-container *ngFor="let message of messages; let i = index; let first = first; let last = last; trackBy: trackByFn">
 							<!-- Start of the day -->
-							<ng-container *ngIf="first || (chat.messages[i - 1].createdAt | date:'d') !== (message.createdAt | date:'d')">
+							<ng-container *ngIf="first || (messages[i - 1].createdAt | date:'d') !== (message.createdAt | date:'d')">
 								<div class="flex items-center justify-center my-3 -mx-6">
 									<div class="flex-auto border-b"></div>
 									<div class="flex-0 mx-4 text-sm font-medium leading-5 text-secondary">
@@ -91,8 +91,8 @@
 								class="flex flex-col"
 								[ngClass]="{'items-end': message.isMine,
                                         'items-start': !message.isMine,
-                                        'mt-0.5': i > 0 && chat.messages[i - 1].isMine === message.isMine,
-                                        'mt-3': i > 0 && chat.messages[i - 1].isMine !== message.isMine}"
+                                        'mt-0.5': i > 0 && messages[i - 1].isMine === message.isMine,
+                                        'mt-3': i > 0 && messages[i - 1].isMine !== message.isMine}"
 							>
 								<!-- Bubble -->
 								<div
@@ -101,7 +101,7 @@
                                             'bg-gray-500 text-gray-50': !message.isMine}"
 								>
 									<!-- Speech bubble tail -->
-									<ng-container *ngIf="last || chat.messages[i + 1].isMine !== message.isMine">
+									<ng-container *ngIf="last || messages[i + 1].isMine !== message.isMine">
 										<div
 											class="absolute bottom-0 w-3 transform"
 											[ngClass]="{'text-blue-500 -right-1 -mr-px mb-px': message.isMine,
@@ -117,8 +117,8 @@
 								<ng-container
 									*ngIf="first
                                        || last
-                                       || chat.messages[i + 1].isMine !== message.isMine
-                                       || chat.messages[i + 1].createdAt !== message.createdAt"
+                                       || messages[i + 1].isMine !== message.isMine
+                                       || messages[i + 1].createdAt !== message.createdAt"
 								>
 									<div
 										class="my-0.5 text-sm font-medium text-secondary"
@@ -145,6 +145,7 @@
 					</div>
 					<mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded fuse-mat-bold w-full ml-4 mt-5">
 						<textarea
+							(keydown)="keyDownFunction($event)"
 							class="min-h-5 my-0 resize-none"
 							style="margin: 11px 0 !important; padding: 0 !important;"
 							[rows]="1"

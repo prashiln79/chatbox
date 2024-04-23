@@ -14,7 +14,7 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { FuseMediaWatcherService } from "@fuse/services/media-watcher";
 import { ChatService } from "../chat.service";
-import { Chat, Profile } from "../chat.types";
+import { Chat, Profile, conversation } from "../chat.types";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 
@@ -31,6 +31,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
 	drawerMode: "over" | "side" = "side";
 	drawerOpened: boolean = false;
 	private _unsubscribeAll: Subject<any> = new Subject<any>();
+	messages: Array<conversation> = null;
 
 	/**
 	 * Constructor
@@ -81,8 +82,14 @@ export class ConversationComponent implements OnInit, OnDestroy {
 	 */
 	ngOnInit(): void {
 		// Chat
-		this._chatService.chat$.pipe(takeUntil(this._unsubscribeAll)).subscribe((chat: Chat) => {
+		this._chatService.loginUserChat$.pipe(takeUntil(this._unsubscribeAll)).subscribe((chat: Chat) => {
 			this.chat = chat;
+			// Mark for check
+			this._changeDetectorRef.markForCheck();
+		});
+
+		this._chatService.conversation$.pipe(takeUntil(this._unsubscribeAll)).subscribe((conversation: Array<conversation>) => {
+			this.messages = conversation;
 			// Mark for check
 			this._changeDetectorRef.markForCheck();
 		});
@@ -164,17 +171,43 @@ export class ConversationComponent implements OnInit, OnDestroy {
 		if (msg) {
 			this.chat.unreadCount++;
 			this.chat.lastMessageAt = moment().format("DD/MM/YYYY");
-			this.chat.lastMessage = msg;
-			this.chat.messages.push({
-				id: uuidv4(),
-				senderId: this.profile.id,
-				receiverId: this.chat.id,
-				isMine: true,
-				value: msg,
-				createdAt: new Date().toString(),
-			});
+			this.chat.lastMessage = "new message...";
+			if (this.chat.messages) {
+				this.chat.messages.push({
+					id: uuidv4(),
+					senderId: this.profile.id,
+					receiverId: this.chat.id,
+					isMine: true,
+					value: msg,
+					createdAt: new Date().toString(),
+				});
+			} else {
+				this.chat.messages = [
+					{
+						id: uuidv4(),
+						senderId: this.profile.id,
+						receiverId: this.chat.id,
+						isMine: true,
+						value: msg,
+						createdAt: new Date().toString(),
+					},
+				];
+			}
 			this._chatService.updateChat(this.chat.id, this.chat).then(() => {});
 			this.messageInput.nativeElement.value = "";
 		}
+	}
+
+	keyDownFunction(event) {
+		if (event.keyCode === 13) {
+			this.sendMsg(this.messageInput.nativeElement.value);
+		}
+	}
+
+	deleteChat() {
+		let ids = [this.chat.id, this.profile.id];
+		this.chat.messages = this.chat.messages.filter((i: any) => !ids.includes(i.senderId));
+		//this._chatService.updateChat(this.chat.id, this.chat).then(() => {});
+		this._chatService.chats$[this.profile.id] = this.chat.messages.filter((i: any) => !ids.includes(i.senderId));
 	}
 }

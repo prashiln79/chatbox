@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, Observable, of, throwError } from "rxjs";
-import { filter, map, switchMap, take, tap } from "rxjs/operators";
+import { BehaviorSubject, Observable } from "rxjs";
+import { tap } from "rxjs/operators";
 import { Chat, Contact, Profile, conversation } from "./chat.types";
-import { Database, getDatabase, ref, set, onValue, update } from "firebase/database";
+import { Database, getDatabase, ref, set, onValue, update, query } from "firebase/database";
+import { collection, limit, where } from "firebase/firestore";
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { environment } from "environments/environment";
 import moment from "moment";
@@ -14,12 +15,12 @@ export class ChatService {
 	private app: FirebaseApp;
 	private db: Database;
 	private _chatsRef;
-	private _onlineUsers: BehaviorSubject<Chat[]> = new BehaviorSubject([]);
-	private _chat: BehaviorSubject<Chat> = new BehaviorSubject(null);
+	private _loginUserChat: BehaviorSubject<Chat> = new BehaviorSubject(null);
 	private _chats: BehaviorSubject<Chat[]> = new BehaviorSubject([]);
 	private _contact: BehaviorSubject<Contact> = new BehaviorSubject(null);
 	private _contacts: BehaviorSubject<Contact[]> = new BehaviorSubject(null);
 	private _profile: BehaviorSubject<Profile> = new BehaviorSubject(null);
+	private _conversation: BehaviorSubject<Array<conversation>> = new BehaviorSubject(null);
 
 	/**
 	 * Constructor
@@ -37,8 +38,8 @@ export class ChatService {
 	/**
 	 * Getter for chat
 	 */
-	get chat$(): Observable<Chat> {
-		return this._chat.asObservable();
+	get loginUserChat$(): Observable<Chat> {
+		return this._loginUserChat.asObservable();
 	}
 
 	/**
@@ -67,6 +68,13 @@ export class ChatService {
 	 */
 	get profile$(): Observable<Profile> {
 		return this._profile.asObservable();
+	}
+
+	/**
+	 * Getter for conversation
+	 */
+	get conversation$(): Observable<Array<conversation>> {
+		return this._conversation.asObservable();
 	}
 
 	// -----------------------------------------------------------------------------------------------------
@@ -124,15 +132,35 @@ export class ChatService {
 	 *
 	 * @param id
 	 */
-	getChatById(senderId: string, receiverId: string): any {
-		this._chat.next(this._chats.value[receiverId]);
-		onValue(ref(this.db, "chats/" + senderId), (snapshot: any) => {
-			this.combineSenderAndReceiverChats(senderId, snapshot.val()?.messages || []);
-		});
+	getChatById(senderId: string): any {
+		this._loginUserChat.next(this._chats.value[senderId]);
+	}
 
-		onValue(ref(this.db, "chats/" + receiverId + "/messages"), (snapshot: any) => {
-			this.combineSenderAndReceiverChats(senderId, snapshot.val());
-		});
+	/**
+	 * Get Conversation
+	 */
+	setConversationBetween(senderId: string, receiverId: string): void {
+		if (senderId) {
+			onValue(ref(this.db, "chats/" + senderId + "/messages"), (snapshot: any) => {
+				this.combineSenderAndReceiverChats(senderId, receiverId, snapshot.val() || []);
+			});
+		}
+
+		if (receiverId) {
+			onValue(ref(this.db, "chats/" + receiverId + "/messages"), (snapshot: any) => {
+				this.combineSenderAndReceiverChats(senderId, receiverId, snapshot.val() || []);
+			});
+		}
+	}
+
+	/**
+	 * Get chat
+	 *
+	 * @param senderId
+	 * @param receiverId
+	 */
+	getConversation(): Observable<Array<conversation>> {
+		return this._conversation;
 	}
 
 	/**
@@ -184,24 +212,24 @@ export class ChatService {
 	 * Reset the selected chat
 	 */
 	resetChat(): void {
-		this._chat.next(null);
+		this._loginUserChat.next(null);
 	}
 
-	combineSenderAndReceiverChats(senderId, chats: Array<conversation>) {
-		let messagesList = structuredClone(chats);
-		let chat = this._chat.value;
-		let currentMessagesList = structuredClone(chat?.messages || []);
+	combineSenderAndReceiverChats(senderId, receiverId, chats: Array<conversation>) {
+		let newConversationList = (chats || []).filter(
+			(i: conversation) => (i.senderId == senderId && i.receiverId == receiverId) || (i.senderId == receiverId && i.receiverId == senderId)
+		);
+		let currentConversationList = (this._conversation.value || []).filter(
+			(i: conversation) => (i.senderId == senderId && i.receiverId == receiverId) || (i.senderId == receiverId && i.receiverId == senderId)
+		);
 
-		for (let id in messagesList) {
-			if (
-				!currentMessagesList?.map((message) => message.id).includes(messagesList[id].id) &&
-				(messagesList[id].senderId == senderId || messagesList[id].receiverId == senderId)
-			) {
-				messagesList[id].isMine = senderId == chats[id].senderId;
-				currentMessagesList.push(messagesList[id]);
+		for (let id in newConversationList) {
+			if (!currentConversationList?.map((message) => message.id).includes(newConversationList[id].id)) {
+				let input = structuredClone(newConversationList[id]);
+				input.isMine = input.senderId == senderId;
+				currentConversationList.push(input);
 			}
 		}
-		chat.messages = currentMessagesList;
-		this._chat.next(chat);
+		this._conversation.next(currentConversationList);
 	}
 }

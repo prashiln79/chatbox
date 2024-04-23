@@ -71,7 +71,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
 		// });
 
 		// Selected chat
-		this._chatService.chat$.pipe(takeUntil(this._unsubscribeAll)).subscribe((chat: Chat) => {
+		this._chatService.loginUserChat$.pipe(takeUntil(this._unsubscribeAll)).subscribe((chat: Chat) => {
 			this.selectedChat = chat;
 
 			// Mark for check
@@ -149,7 +149,8 @@ export class ChatsComponent implements OnInit, OnDestroy {
 	}
 
 	onUserClick(chat): void {
-		this._chatService.getChatById(this.profile.id, chat.id);
+		this._chatService.setConversationBetween(this.profile.id, chat.id);
+		this._chatService.getChatById(chat.id);
 		// Mark for check
 		this._changeDetectorRef.markForCheck();
 	}
