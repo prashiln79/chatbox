@@ -51,7 +51,7 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 This project is licensed under the MIT License - see the [LICENSE](/LICENSE) file for details.
 
 ## Acknowledgements
-- [React Native](https://reactnative.dev/)
+- [Angular](https://angular.io/)
 - [Firebase](https://firebase.google.com/)
 - [Redux](https://redux.js.org/)
 - [React Navigation](https://reactnavigation.org/)
